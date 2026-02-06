@@ -1,0 +1,25 @@
+docs/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# Compiled output
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
