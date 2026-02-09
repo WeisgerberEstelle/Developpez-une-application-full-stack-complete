@@ -3,9 +3,9 @@
 
 -- Users / Password1!
 INSERT INTO users (id, email, username, password) VALUES
-    (1, 'alice@example.com', 'alice', '$2b$10$JCuzuyOBnszj1OMF1nVkh.B8ohmAjpHfzT1kfwqA4V9D66JiSdDny'),
-    (2, 'bob@example.com', 'bob', '$2b$10$JCuzuyOBnszj1OMF1nVkh.B8ohmAjpHfzT1kfwqA4V9D66JiSdDny'),
-    (3, 'charlie@example.com', 'charlie', '$2b$10$JCuzuyOBnszj1OMF1nVkh.B8ohmAjpHfzT1kfwqA4V9D66JiSdDny');
+    (1, 'alice@example.com', 'alice', '$2a$10$hmCc92x0JOhSGRHBhl093uFMaAz.ANlOia.DAdRXO.AeqaVz1otX.'),
+    (2, 'bob@example.com', 'bob', '$2a$10$hmCc92x0JOhSGRHBhl093uFMaAz.ANlOia.DAdRXO.AeqaVz1otX.'),
+    (3, 'charlie@example.com', 'charlie', '$2a$10$hmCc92x0JOhSGRHBhl093uFMaAz.ANlOia.DAdRXO.AeqaVz1otX.');
 
 -- Subscriptions (alice: Java, Angular, Spring Boot | bob: JavaScript, Angular, Python | charlie: Java, DevOps, Securite)
 INSERT INTO subscriptions (user_id, topic_id) VALUES
