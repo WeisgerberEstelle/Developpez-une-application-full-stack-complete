@@ -1,0 +1,29 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .logo {
+    width: 80px;
+    margin-bottom: 16px;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    gap: 8px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .register-link {
+    margin-top: 16px;
+  }
+}

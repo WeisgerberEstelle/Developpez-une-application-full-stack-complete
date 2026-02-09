@@ -1,0 +1,27 @@
+<div class="login-container">
+  <img src="/assets/logo_p6.png" alt="MDD Logo" class="logo" />
+  <h1>Connexion</h1>
+
+  <form (ngSubmit)="onSubmit()" class="login-form">
+    <mat-form-field appearance="outline">
+      <mat-label>Email ou nom d'utilisateur</mat-label>
+      <input matInput [(ngModel)]="emailOrUsername" name="emailOrUsername" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Mot de passe</mat-label>
+      <input matInput [(ngModel)]="password" name="password" type="password" required />
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Se connecter</button>
+  </form>
+
+  <p class="register-link">
+    Pas encore de compte ?
+    <a routerLink="/register">S'inscrire</a>
+  </p>
+</div>
