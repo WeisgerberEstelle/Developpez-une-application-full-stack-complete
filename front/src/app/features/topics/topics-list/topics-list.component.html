@@ -1,5 +1,5 @@
 <div class="topics-container">
-  <h1>Themes</h1>
+  <h1>Thèmes</h1>
 
   <div class="topics-grid">
     <mat-card *ngFor="let topic of topics" class="topic-card">
@@ -9,6 +9,15 @@
       <mat-card-content>
         <p>{{ topic.description }}</p>
       </mat-card-content>
+      <mat-card-actions>
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="isSubscribed(topic.id)"
+          (click)="subscribe(topic.id)">
+          {{ isSubscribed(topic.id) ? 'Déjà abonné' : "S'abonner" }}
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>
