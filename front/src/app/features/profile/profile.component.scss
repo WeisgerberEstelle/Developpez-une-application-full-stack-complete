@@ -1,0 +1,46 @@
+.profile-container {
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+
+  h1, h2 {
+    margin-bottom: 16px;
+  }
+
+  .profile-form-card {
+    margin-bottom: 32px;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .messages {
+    margin-bottom: 8px;
+
+    .success {
+      color: green;
+    }
+
+    .error {
+      color: red;
+    }
+  }
+
+  .subscriptions-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .logout-section {
+    margin-top: 32px;
+  }
+}
