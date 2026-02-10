@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { AuthResponse, LoginRequest, RegisterRequest } from '../../models/auth.interface';
-import { User } from '../../models/user.interface';
+import { UpdateProfileRequest, User } from '../../models/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,10 @@ export class AuthService {
 
   me(): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/user/me`);
+  }
+
+  updateProfile(request: UpdateProfileRequest): Observable<User> {
+    return this.http.put<User>(`${this.apiUrl}/user/me`, request);
   }
 
   getToken(): string | null {
