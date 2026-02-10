@@ -6,3 +6,9 @@ export interface User {
   username: string;
   subscriptions: Topic[];
 }
+
+export interface UpdateProfileRequest {
+  email?: string;
+  username?: string;
+  password?: string;
+}
