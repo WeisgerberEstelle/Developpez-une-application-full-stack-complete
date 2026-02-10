@@ -1,0 +1,21 @@
+.topics-container {
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 24px;
+  }
+
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .topic-card {
+    mat-card-content p {
+      margin-top: 8px;
+    }
+  }
+}

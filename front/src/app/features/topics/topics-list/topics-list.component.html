@@ -1,0 +1,14 @@
+<div class="topics-container">
+  <h1>Themes</h1>
+
+  <div class="topics-grid">
+    <mat-card *ngFor="let topic of topics" class="topic-card">
+      <mat-card-header>
+        <mat-card-title>{{ topic.name }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>{{ topic.description }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
