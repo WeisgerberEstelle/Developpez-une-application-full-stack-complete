@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
 import { TopicsListComponent } from './features/topics/topics-list/topics-list.component';
+import { ProfileComponent } from './features/profile/profile.component';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
@@ -20,6 +21,7 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     HomeComponent,
     LoginComponent,
     TopicsListComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
