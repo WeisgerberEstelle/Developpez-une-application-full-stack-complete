@@ -5,8 +5,8 @@ import com.openclassrooms.mddapi.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = TopicMapper.class)
 public interface UserMapper {
-    @Mapping(target = "subscriptions", ignore = true)
+    @Mapping(source = "subscribedTopics", target = "subscriptions")
     UserResponse toResponse(User user);
 }
