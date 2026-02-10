@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './features/auth/login/login.component';
+import { RegisterComponent } from './features/auth/register/register.component';
 import { TopicsListComponent } from './features/topics/topics-list/topics-list.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
@@ -20,6 +21,7 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     AppComponent,
     HomeComponent,
     LoginComponent,
+    RegisterComponent,
     TopicsListComponent,
     ProfileComponent,
   ],
