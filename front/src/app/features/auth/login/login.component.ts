@@ -25,7 +25,7 @@ export class LoginComponent {
       password: this.password
     }).subscribe({
       next: () => {
-        this.router.navigate(['/topics']);
+        this.router.navigate(['/feed']);
       },
       error: (err) => {
         this.errorMessage = err.error?.error || 'Login failed';
