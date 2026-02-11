@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class CreatePostRequest {
-
     @NotNull(message = "Topic is required")
     private Long topicId;
 
