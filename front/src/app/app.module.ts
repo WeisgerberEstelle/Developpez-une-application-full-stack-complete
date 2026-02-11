@@ -18,7 +18,10 @@ import { FeedComponent } from './features/feed/feed.component';
 import { PostDetailComponent } from './features/posts/post-detail/post-detail.component';
 import { CreatePostComponent } from './features/posts/create-post/create-post.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
+import { HeaderComponent } from './shared/header/header.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     FeedComponent,
     PostDetailComponent,
     CreatePostComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +46,8 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     MatInputModule,
     MatCardModule,
     MatSelectModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
   providers: [provideHttpClient(withInterceptors([jwtInterceptor]))],
   bootstrap: [AppComponent],
