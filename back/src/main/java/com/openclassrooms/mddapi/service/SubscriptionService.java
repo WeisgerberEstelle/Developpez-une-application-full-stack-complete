@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
-
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
     private final TopicMapper topicMapper;

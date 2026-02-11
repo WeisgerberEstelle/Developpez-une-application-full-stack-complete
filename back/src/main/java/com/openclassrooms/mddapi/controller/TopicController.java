@@ -14,7 +14,6 @@ import java.util.List;
 @RequestMapping("/api/topics")
 @RequiredArgsConstructor
 public class TopicController {
-
     private final TopicService topicService;
 
     @GetMapping

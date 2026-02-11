@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TopicService {
-
     private final TopicRepository topicRepository;
     private final TopicMapper topicMapper;
 
