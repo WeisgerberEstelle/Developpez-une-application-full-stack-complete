@@ -1,0 +1,35 @@
+.feed-container {
+  padding: 24px;
+  max-width: 960px;
+  margin: 0 auto;
+
+  .feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .feed-actions {
+      display: flex;
+      gap: 8px;
+    }
+  }
+
+  .feed-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .post-card {
+    cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    mat-card-content p {
+      margin-top: 8px;
+    }
+  }
+}

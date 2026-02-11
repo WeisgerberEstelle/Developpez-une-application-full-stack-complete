@@ -14,6 +14,10 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { TopicsListComponent } from './features/topics/topics-list/topics-list.component';
 import { ProfileComponent } from './features/profile/profile.component';
+import { FeedComponent } from './features/feed/feed.component';
+import { PostDetailComponent } from './features/posts/post-detail/post-detail.component';
+import { CreatePostComponent } from './features/posts/create-post/create-post.component';
+import { MatSelectModule } from '@angular/material/select';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
 
 @NgModule({
@@ -24,6 +28,9 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     RegisterComponent,
     TopicsListComponent,
     ProfileComponent,
+    FeedComponent,
+    PostDetailComponent,
+    CreatePostComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,7 @@ import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatSelectModule,
   ],
   providers: [provideHttpClient(withInterceptors([jwtInterceptor]))],
   bootstrap: [AppComponent],
