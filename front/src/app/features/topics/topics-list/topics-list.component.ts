@@ -8,7 +8,7 @@ import { Topic } from '../../../models/topic.interface';
   selector: 'app-topics-list',
   standalone: false,
   templateUrl: './topics-list.component.html',
-  styleUrls: ['./topics-list.component.scss']
+  styleUrl: './topics-list.component.scss'
 })
 export class TopicsListComponent implements OnInit {
   topics: Topic[] = [];

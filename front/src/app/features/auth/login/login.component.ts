@@ -6,7 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-login',
   standalone: false,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   emailOrUsername = '';
