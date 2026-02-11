@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../../core/services/post.service';
+import { CommentService } from '../../../core/services/comment.service';
 import { Post } from '../../../models/post.interface';
+import { Comment } from '../../../models/comment.interface';
 
 @Component({
   selector: 'app-post-detail',
@@ -11,17 +13,45 @@ import { Post } from '../../../models/post.interface';
 })
 export class PostDetailComponent implements OnInit {
   post: Post | null = null;
+  comments: Comment[] = [];
+  newComment = '';
+  commentError = '';
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private commentService: CommentService
   ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.postService.getById(id).subscribe({
-      next: (post) => this.post = post,
+      next: (post) => {
+        this.post = post;
+        this.loadComments(id);
+      },
       error: (err) => console.error('Failed to load post', err)
+    });
+  }
+
+  loadComments(postId: number): void {
+    this.commentService.getComments(postId).subscribe({
+      next: (comments) => this.comments = comments,
+      error: (err) => console.error('Failed to load comments', err)
+    });
+  }
+
+  addComment(): void {
+    if (!this.post || !this.newComment.trim()) {
+      return;
+    }
+    this.commentError = '';
+    this.commentService.addComment(this.post.id, { content: this.newComment.trim() }).subscribe({
+      next: (comment) => {
+        this.comments.push(comment);
+        this.newComment = '';
+      },
+      error: () => this.commentError = 'Erreur lors de l\'ajout du commentaire.'
     });
   }
 }
