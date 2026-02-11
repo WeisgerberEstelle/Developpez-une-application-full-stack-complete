@@ -13,4 +13,35 @@
   <div class="post-content">
     <p>{{ post.content }}</p>
   </div>
+
+  <hr class="separator" />
+
+  <section class="comments-section">
+    <h2>Commentaires</h2>
+
+    <div *ngIf="comments.length === 0" class="no-comments">
+      Aucun commentaire pour le moment.
+    </div>
+
+    <div class="comment-list">
+      <div *ngFor="let comment of comments" class="comment-item">
+        <div class="comment-header">
+          <span class="comment-author">{{ comment.authorUsername }}</span>
+          <span class="comment-date">{{ comment.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <p class="comment-content">{{ comment.content }}</p>
+      </div>
+    </div>
+
+    <div class="comment-form">
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>Votre commentaire</mat-label>
+        <textarea matInput [(ngModel)]="newComment" name="newComment" rows="3"></textarea>
+      </mat-form-field>
+      <div *ngIf="commentError" class="error-message">{{ commentError }}</div>
+      <button mat-raised-button color="primary" (click)="addComment()" [disabled]="!newComment.trim()">
+        Commenter
+      </button>
+    </div>
+  </section>
 </div>
