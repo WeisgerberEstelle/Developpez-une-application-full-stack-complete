@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <nav class="nav-links">
+    <a routerLink="/feed" routerLinkActive="active">Articles</a>
+    <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <nav class="nav-right">
+    <a routerLink="/profile" routerLinkActive="active">
+      <mat-icon>person</mat-icon>
+    </a>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </nav>
+</mat-toolbar>
