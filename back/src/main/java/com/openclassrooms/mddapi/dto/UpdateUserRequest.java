@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class UpdateUserRequest {
-
     @Email(message = "Invalid email format")
     private String email;
 
