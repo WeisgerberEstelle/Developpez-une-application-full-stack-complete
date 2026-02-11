@@ -1,0 +1,32 @@
+<div class="create-post-container">
+  <a routerLink="/feed" class="back-link">&larr; Back to feed</a>
+
+  <h1>Create an article</h1>
+
+  <form (ngSubmit)="onSubmit()" class="create-post-form">
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Topic</mat-label>
+      <mat-select [(ngModel)]="topicId" name="topicId" required>
+        <mat-option *ngFor="let topic of topics" [value]="topic.id">
+          {{ topic.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="title" name="title" required maxlength="255" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Content</mat-label>
+      <textarea matInput [(ngModel)]="content" name="content" required rows="10"></textarea>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Publish</button>
+  </form>
+</div>
