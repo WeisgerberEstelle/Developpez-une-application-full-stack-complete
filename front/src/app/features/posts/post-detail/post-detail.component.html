@@ -1,0 +1,16 @@
+<div class="post-detail-container" *ngIf="post">
+  <a routerLink="/feed" class="back-link">&larr; Back to feed</a>
+
+  <div class="post-meta">
+    <span class="topic">{{ post.topicName }}</span>
+    <span class="date">{{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+  </div>
+
+  <h1>{{ post.title }}</h1>
+
+  <p class="author">By {{ post.authorUsername }}</p>
+
+  <div class="post-content">
+    <p>{{ post.content }}</p>
+  </div>
+</div>
