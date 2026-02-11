@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/topics")
 @RequiredArgsConstructor
 public class SubscriptionController {
-
     private final SubscriptionService subscriptionService;
 
     @PostMapping("/{id}/subscribe")

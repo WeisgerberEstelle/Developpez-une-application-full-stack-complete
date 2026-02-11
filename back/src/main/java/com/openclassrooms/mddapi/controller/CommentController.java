@@ -16,7 +16,6 @@ import java.util.List;
 @RequestMapping("/api/posts/{postId}/comments")
 @RequiredArgsConstructor
 public class CommentController {
-
     private final CommentService commentService;
 
     @GetMapping
