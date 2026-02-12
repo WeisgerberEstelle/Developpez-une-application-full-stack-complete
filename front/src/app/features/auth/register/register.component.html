@@ -7,19 +7,31 @@
       <mat-label>Email</mat-label>
       <input matInput [(ngModel)]="email" name="email" type="email"
              required email #emailField="ngModel" />
-      <mat-error *ngIf="emailField.hasError('required')">Email is required</mat-error>
-      <mat-error *ngIf="emailField.hasError('email')">Invalid email format</mat-error>
+      @if (emailField.hasError('required')) {
+        <mat-error>Email is required</mat-error>
+      }
+      @if (emailField.hasError('email')) {
+        <mat-error>Invalid email format</mat-error>
+      }
     </mat-form-field>
-    <div class="field-error" *ngIf="fieldErrors['email']">{{ fieldErrors['email'] }}</div>
+    @if (fieldErrors['email']) {
+      <div class="field-error">{{ fieldErrors['email'] }}</div>
+    }
 
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>Nom d'utilisateur</mat-label>
       <input matInput [(ngModel)]="username" name="username"
              required minlength="3" maxlength="100" #usernameField="ngModel" />
-      <mat-error *ngIf="usernameField.hasError('required')">Username is required</mat-error>
-      <mat-error *ngIf="usernameField.hasError('minlength')">Username must be at least 3 characters</mat-error>
+      @if (usernameField.hasError('required')) {
+        <mat-error>Username is required</mat-error>
+      }
+      @if (usernameField.hasError('minlength')) {
+        <mat-error>Username must be at least 3 characters</mat-error>
+      }
     </mat-form-field>
-    <div class="field-error" *ngIf="fieldErrors['username']">{{ fieldErrors['username'] }}</div>
+    @if (fieldErrors['username']) {
+      <div class="field-error">{{ fieldErrors['username'] }}</div>
+    }
 
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>Mot de passe</mat-label>
@@ -27,15 +39,25 @@
              required minlength="8"
              pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
              #passwordField="ngModel" />
-      <mat-error *ngIf="passwordField.hasError('required')">Password is required</mat-error>
-      <mat-error *ngIf="passwordField.hasError('minlength')">Password must be at least 8 characters</mat-error>
-      <mat-error *ngIf="passwordField.hasError('pattern')">Must contain 1 digit, 1 lowercase, 1 uppercase, and 1 special character</mat-error>
+      @if (passwordField.hasError('required')) {
+        <mat-error>Password is required</mat-error>
+      }
+      @if (passwordField.hasError('minlength')) {
+        <mat-error>Password must be at least 8 characters</mat-error>
+      }
+      @if (passwordField.hasError('pattern')) {
+        <mat-error>Must contain 1 digit, 1 lowercase, 1 uppercase, and 1 special character</mat-error>
+      }
     </mat-form-field>
-    <div class="field-error" *ngIf="fieldErrors['password']">{{ fieldErrors['password'] }}</div>
+    @if (fieldErrors['password']) {
+      <div class="field-error">{{ fieldErrors['password'] }}</div>
+    }
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
 
     <button mat-raised-button color="primary" type="submit">S'inscrire</button>
   </form>

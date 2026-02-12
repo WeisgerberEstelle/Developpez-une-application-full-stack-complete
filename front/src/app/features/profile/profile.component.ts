@@ -9,7 +9,7 @@ import { Topic } from '../../models/topic.interface';
   selector: 'app-profile',
   standalone: false,
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
   user: User | null = null;

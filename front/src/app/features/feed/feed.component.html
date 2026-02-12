@@ -11,21 +11,23 @@
     </div>
   </div>
 
-  <div class="feed-list" *ngIf="posts.length > 0; else noPosts">
-    <mat-card *ngFor="let post of posts" class="post-card" (click)="goToPost(post.id)">
-      <mat-card-header>
-        <mat-card-title>{{ post.title }}</mat-card-title>
-        <mat-card-subtitle>
-          {{ post.topicName }} &middot; {{ post.authorUsername }} &middot; {{ post.createdAt | date:'dd/MM/yyyy' }}
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-  <ng-template #noPosts>
+  @if (posts.length > 0) {
+    <div class="feed-list">
+      @for (post of posts; track post.id) {
+        <mat-card class="post-card" (click)="goToPost(post.id)">
+          <mat-card-header>
+            <mat-card-title>{{ post.title }}</mat-card-title>
+            <mat-card-subtitle>
+              {{ post.topicName }} &middot; {{ post.authorUsername }} &middot; {{ post.createdAt | date:'dd/MM/yyyy' }}
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  } @else {
     <p>No articles yet. Subscribe to topics to see articles here.</p>
-  </ng-template>
+  }
 </div>

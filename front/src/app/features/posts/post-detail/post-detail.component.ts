@@ -9,7 +9,7 @@ import { Comment } from '../../../models/comment.interface';
   selector: 'app-post-detail',
   standalone: false,
   templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.scss']
+  styleUrl: './post-detail.component.scss'
 })
 export class PostDetailComponent implements OnInit {
   post: Post | null = null;

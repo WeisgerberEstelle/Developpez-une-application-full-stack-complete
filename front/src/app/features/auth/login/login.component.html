@@ -13,9 +13,11 @@
       <input matInput [(ngModel)]="password" name="password" type="password" required />
     </mat-form-field>
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
 
     <button mat-raised-button color="primary" type="submit">Se connecter</button>
   </form>

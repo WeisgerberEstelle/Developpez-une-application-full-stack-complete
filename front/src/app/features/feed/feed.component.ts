@@ -7,7 +7,7 @@ import { Post } from '../../models/post.interface';
   selector: 'app-feed',
   standalone: false,
   templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.scss']
+  styleUrl: './feed.component.scss'
 })
 export class FeedComponent implements OnInit {
   posts: Post[] = [];

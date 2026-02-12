@@ -6,7 +6,7 @@ import { AuthService } from '../../../core/services/auth.service';
   selector: 'app-register',
   standalone: false,
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
   email = '';

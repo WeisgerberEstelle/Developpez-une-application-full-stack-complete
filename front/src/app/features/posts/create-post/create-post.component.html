@@ -7,9 +7,11 @@
     <mat-form-field appearance="outline" subscriptSizing="dynamic">
       <mat-label>Topic</mat-label>
       <mat-select [(ngModel)]="topicId" name="topicId" required>
-        <mat-option *ngFor="let topic of topics" [value]="topic.id">
-          {{ topic.name }}
-        </mat-option>
+        @for (topic of topics; track topic.id) {
+          <mat-option [value]="topic.id">
+            {{ topic.name }}
+          </mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
@@ -23,9 +25,11 @@
       <textarea matInput [(ngModel)]="content" name="content" required rows="10"></textarea>
     </mat-form-field>
 
-    <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div>
+    @if (errorMessage) {
+      <div class="error-message">
+        {{ errorMessage }}
+      </div>
+    }
 
     <button mat-raised-button color="primary" type="submit">Publish</button>
   </form>

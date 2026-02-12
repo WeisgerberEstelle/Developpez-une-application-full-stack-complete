@@ -8,7 +8,7 @@ import { Topic } from '../../../models/topic.interface';
   selector: 'app-create-post',
   standalone: false,
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.scss']
+  styleUrl: './create-post.component.scss'
 })
 export class CreatePostComponent implements OnInit {
   topics: Topic[] = [];
