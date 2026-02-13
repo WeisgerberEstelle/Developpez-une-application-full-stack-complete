@@ -1,25 +1,25 @@
-<header class="header">
-  <a routerLink="/feed" class="logo">
+<header class="header" role="banner">
+  <a routerLink="/feed" class="logo" aria-label="MDD - Accueil">
     <img src="/assets/logo_p6.png" alt="MDD" />
   </a>
 
   @if (authService.isLoggedIn()) {
     <div class="header-right">
-      <nav class="nav-links">
-        <a (click)="logout()" class="nav-link nav-link--logout">Se déconnecter</a>
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a (click)="logout()" (keydown.enter)="logout()" tabindex="0" class="nav-link nav-link--logout">Se déconnecter</a>
         <a routerLink="/feed" routerLinkActive="active" class="nav-link">Articles</a>
         <a routerLink="/topics" routerLinkActive="active" class="nav-link">Thèmes</a>
       </nav>
 
-      <a routerLink="/profile" class="profile-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+      <a routerLink="/profile" class="profile-icon" aria-label="Mon profil">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
         </svg>
       </a>
     </div>
 
-    <button class="hamburger" (click)="toggleMenu()">
-      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+    <button class="hamburger" (click)="toggleMenu()" aria-label="Ouvrir le menu" [attr.aria-expanded]="menuOpen">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
       </svg>
     </button>
@@ -28,8 +28,8 @@
 
 @if (menuOpen) {
   <div class="overlay" (click)="closeMenu()"></div>
-  <nav class="mobile-menu">
-    <a (click)="logout()" class="nav-link nav-link--logout">Se déconnecter</a>
+  <nav class="mobile-menu" aria-label="Menu mobile">
+    <a (click)="logout()" (keydown.enter)="logout()" tabindex="0" class="nav-link nav-link--logout">Se déconnecter</a>
     <a routerLink="/feed" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Articles</a>
     <a routerLink="/topics" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Thèmes</a>
     <a routerLink="/profile" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Profil</a>
