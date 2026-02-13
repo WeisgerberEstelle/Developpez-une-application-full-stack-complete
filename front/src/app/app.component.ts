@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthService } from './core/services/auth.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,14 @@ import { AuthService } from './core/services/auth.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  constructor(private authService: AuthService) {}
+  showHeader = true;
 
-  get isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      const url = (event as NavigationEnd).urlAfterRedirects;
+      this.showHeader = url !== '/';
+    });
   }
 }

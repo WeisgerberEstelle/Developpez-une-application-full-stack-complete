@@ -1,8 +1,4 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
@@ -17,9 +13,6 @@ import { ProfileComponent } from './features/profile/profile.component';
 import { FeedComponent } from './features/feed/feed.component';
 import { PostDetailComponent } from './features/posts/post-detail/post-detail.component';
 import { CreatePostComponent } from './features/posts/create-post/create-post.component';
-import { MatSelectModule } from '@angular/material/select';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
 import { jwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { HeaderComponent } from './shared/header/header.component';
 
@@ -41,13 +34,6 @@ import { HeaderComponent } from './shared/header/header.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatSelectModule,
-    MatToolbarModule,
-    MatIconModule,
   ],
   providers: [provideHttpClient(withInterceptors([jwtInterceptor]))],
   bootstrap: [AppComponent],
