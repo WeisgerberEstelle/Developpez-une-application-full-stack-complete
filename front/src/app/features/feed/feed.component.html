@@ -1,9 +1,9 @@
 <div class="page-container">
   <div class="feed-header">
     <button class="btn btn--primary btn--md" routerLink="/posts/create">Créer un article</button>
-    <span class="sort-toggle" (click)="toggleSort()">
+    <button class="sort-toggle" (click)="toggleSort()" aria-label="Trier les articles">
       Trier par &darr;
-    </span>
+    </button>
   </div>
 
   @if (posts.length > 0) {
