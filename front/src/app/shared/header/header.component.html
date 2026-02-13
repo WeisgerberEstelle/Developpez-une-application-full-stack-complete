@@ -1,17 +1,37 @@
-<mat-toolbar color="primary">
-  <nav class="nav-links">
-    <a routerLink="/feed" routerLinkActive="active">Articles</a>
-    <a routerLink="/topics" routerLinkActive="active">Thèmes</a>
-  </nav>
+<header class="header">
+  <a routerLink="/feed" class="logo">
+    <img src="/assets/logo_p6.png" alt="MDD" />
+  </a>
 
-  <span class="spacer"></span>
+  @if (authService.isLoggedIn()) {
+    <div class="header-right">
+      <nav class="nav-links">
+        <a (click)="logout()" class="nav-link nav-link--logout">Se déconnecter</a>
+        <a routerLink="/feed" routerLinkActive="active" class="nav-link">Articles</a>
+        <a routerLink="/topics" routerLinkActive="active" class="nav-link">Thèmes</a>
+      </nav>
 
-  <nav class="nav-right">
-    <a routerLink="/profile" routerLinkActive="active">
-      <mat-icon>person</mat-icon>
-    </a>
-    <button mat-icon-button (click)="logout()">
-      <mat-icon>logout</mat-icon>
+      <a routerLink="/profile" class="profile-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+        </svg>
+      </a>
+    </div>
+
+    <button class="hamburger" (click)="toggleMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      </svg>
     </button>
+  }
+</header>
+
+@if (menuOpen) {
+  <div class="overlay" (click)="closeMenu()"></div>
+  <nav class="mobile-menu">
+    <a (click)="logout()" class="nav-link nav-link--logout">Se déconnecter</a>
+    <a routerLink="/feed" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Articles</a>
+    <a routerLink="/topics" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Thèmes</a>
+    <a routerLink="/profile" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Profil</a>
   </nav>
-</mat-toolbar>
+}

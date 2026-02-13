@@ -9,13 +9,24 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  menuOpen = false;
+
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {}
 
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu(): void {
+    this.menuOpen = false;
+  }
+
   logout(): void {
     this.authService.logout();
+    this.menuOpen = false;
     this.router.navigate(['/login']);
   }
 }
