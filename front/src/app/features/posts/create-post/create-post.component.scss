@@ -1,35 +1,5 @@
-.create-post-container {
-  padding: 24px;
-  max-width: 720px;
-  margin: 0 auto;
-
-  .back-link {
-    text-decoration: none;
-    color: #666;
-    display: inline-block;
-    margin-bottom: 16px;
-
-    &:hover {
-      color: #333;
-    }
-  }
-
-  h1 {
-    margin-bottom: 24px;
-  }
-
-  .create-post-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    mat-form-field {
-      width: 100%;
-    }
-  }
-
-  .error-message {
-    color: red;
-    font-size: 14px;
-  }
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }

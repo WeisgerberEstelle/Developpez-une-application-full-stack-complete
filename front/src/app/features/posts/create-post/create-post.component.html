@@ -1,36 +1,33 @@
-<div class="create-post-container">
-  <a routerLink="/feed" class="back-link">&larr; Back to feed</a>
+<a routerLink="/feed" class="back-link">&larr;</a>
 
-  <h1>Create an article</h1>
+<div class="page-container--narrow">
+  <h1 class="page-title page-title--content">Créer un nouvel article</h1>
 
   <form (ngSubmit)="onSubmit()" class="create-post-form">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Topic</mat-label>
-      <mat-select [(ngModel)]="topicId" name="topicId" required>
+    <div class="form-group form-group--primary-border">
+      <label for="topicId">Sélectionner un thème</label>
+      <select id="topicId" [(ngModel)]="topicId" name="topicId" required>
+        <option value="" disabled selected>-- Choisir --</option>
         @for (topic of topics; track topic.id) {
-          <mat-option [value]="topic.id">
-            {{ topic.name }}
-          </mat-option>
+          <option [value]="topic.id">{{ topic.name }}</option>
         }
-      </mat-select>
-    </mat-form-field>
+      </select>
+    </div>
 
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Title</mat-label>
-      <input matInput [(ngModel)]="title" name="title" required maxlength="255" />
-    </mat-form-field>
+    <div class="form-group form-group--primary-border">
+      <label for="title">Titre de l'article</label>
+      <input id="title" [(ngModel)]="title" name="title" required maxlength="255" />
+    </div>
 
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Content</mat-label>
-      <textarea matInput [(ngModel)]="content" name="content" required rows="10"></textarea>
-    </mat-form-field>
+    <div class="form-group form-group--primary-border">
+      <label for="content">Contenu de l'article</label>
+      <textarea id="content" [(ngModel)]="content" name="content" required rows="10"></textarea>
+    </div>
 
     @if (errorMessage) {
-      <div class="error-message">
-        {{ errorMessage }}
-      </div>
+      <div class="error-message">{{ errorMessage }}</div>
     }
 
-    <button mat-raised-button color="primary" type="submit">Publish</button>
+    <button type="submit" class="btn btn--primary btn--lg btn--center">Créer</button>
   </form>
 </div>

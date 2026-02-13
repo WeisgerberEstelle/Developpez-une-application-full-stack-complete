@@ -1,15 +1,17 @@
 @if (post) {
-  <div class="post-detail-container">
-    <a routerLink="/feed" class="back-link">&larr; Back to feed</a>
+  <a routerLink="/feed" class="back-link back-link--desktop">&larr;</a>
 
-    <div class="post-meta">
-      <span class="topic">{{ post.topicName }}</span>
-      <span class="date">{{ post.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
+  <div class="page-container--narrow">
+    <div class="title-header">
+      <a routerLink="/feed" class="back-link back-link--mobile">&larr;</a>
+      <h1>{{ post.title }}</h1>
     </div>
 
-    <h1>{{ post.title }}</h1>
-
-    <p class="author">By {{ post.authorUsername }}</p>
+    <div class="post-meta">
+      <span>{{ post.createdAt | date:'dd/MM/yyyy' }}</span>
+      <span>{{ post.authorUsername }}</span>
+      <span>{{ post.topicName }}</span>
+    </div>
 
     <div class="post-content">
       <p>{{ post.content }}</p>
@@ -21,35 +23,34 @@
       <h2>Commentaires</h2>
 
       @if (comments.length === 0) {
-        <div class="no-comments">
-          Aucun commentaire pour le moment.
-        </div>
+        <p class="empty-message">Aucun commentaire pour le moment.</p>
       }
 
       <div class="comment-list">
         @for (comment of comments; track comment.id) {
           <div class="comment-item">
-            <div class="comment-header">
-              <span class="comment-author">{{ comment.authorUsername }}</span>
-              <span class="comment-date">{{ comment.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
-            </div>
+            <span class="comment-author">{{ comment.authorUsername }}</span>
             <p class="comment-content">{{ comment.content }}</p>
           </div>
         }
       </div>
 
       <div class="comment-form">
-        <mat-form-field appearance="outline" subscriptSizing="dynamic">
-          <mat-label>Votre commentaire</mat-label>
-          <textarea matInput [(ngModel)]="newComment" name="newComment" rows="3"></textarea>
-        </mat-form-field>
-        @if (commentError) {
-          <div class="error-message">{{ commentError }}</div>
-        }
-        <button mat-raised-button color="primary" (click)="addComment()" [disabled]="!newComment.trim()">
-          Commenter
+        <textarea
+          [(ngModel)]="newComment"
+          name="newComment"
+          rows="4"
+          placeholder="Écrivez ici votre commentaire"></textarea>
+        <button class="send-btn" (click)="addComment()" [disabled]="!newComment.trim()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 2L11 13"/>
+            <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
+          </svg>
         </button>
       </div>
+      @if (commentError) {
+        <div class="error-message">{{ commentError }}</div>
+      }
     </section>
   </div>
 }
