@@ -1,7 +1,34 @@
-.center {
-  height: 100vh;
+.home-container {
+  min-height: 100dvh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  gap: 64px;
+  padding: 24px;
+  box-sizing: border-box;
+
+  @media (max-width: 768px) {
+    justify-content: flex-start;
+    padding-top: 15vh;
+  }
+}
+
+.logo {
+  width: 550px;
+
+  @media (max-width: 768px) {
+    width: 340px;
+  }
+}
+
+.home-actions {
+  display: flex;
+  gap: 48px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 40px;
+    width: 260px;
+  }
 }
