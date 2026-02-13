@@ -1,4 +1,4 @@
-<a routerLink="/" class="back-link">&larr;</a>
+<a routerLink="/" class="back-link" aria-label="Retour à l'accueil">&larr;</a>
 
 <div class="auth-content">
   <h1 class="page-title page-title--auth">Se connecter</h1>
@@ -6,16 +6,16 @@
   <form (ngSubmit)="onSubmit()" class="auth-form">
     <div class="form-group">
       <label for="emailOrUsername">E-mail ou nom d'utilisateur</label>
-      <input id="emailOrUsername" [(ngModel)]="emailOrUsername" name="emailOrUsername" required />
+      <input id="emailOrUsername" [(ngModel)]="emailOrUsername" name="emailOrUsername" required aria-required="true" />
     </div>
 
     <div class="form-group">
       <label for="password">Mot de passe</label>
-      <input id="password" [(ngModel)]="password" name="password" type="password" required />
+      <input id="password" [(ngModel)]="password" name="password" type="password" required aria-required="true" />
     </div>
 
     @if (errorMessage) {
-      <div class="error-message">{{ errorMessage }}</div>
+      <div class="error-message" role="alert" aria-live="assertive">{{ errorMessage }}</div>
     }
 
     <button type="submit" class="btn btn--primary btn--lg btn--center">Se connecter</button>
