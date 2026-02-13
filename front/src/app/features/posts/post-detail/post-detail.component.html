@@ -1,9 +1,9 @@
 @if (post) {
-  <a routerLink="/feed" class="back-link back-link--desktop">&larr;</a>
+  <a routerLink="/feed" class="back-link back-link--desktop" aria-label="Retour au fil d'articles">&larr;</a>
 
   <div class="page-container--narrow">
     <div class="title-header">
-      <a routerLink="/feed" class="back-link back-link--mobile">&larr;</a>
+      <a routerLink="/feed" class="back-link back-link--mobile" aria-label="Retour au fil d'articles">&larr;</a>
       <h1>{{ post.title }}</h1>
     </div>
 
@@ -40,16 +40,17 @@
           [(ngModel)]="newComment"
           name="newComment"
           rows="4"
-          placeholder="Écrivez ici votre commentaire"></textarea>
-        <button class="send-btn" (click)="addComment()" [disabled]="!newComment.trim()">
-          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          placeholder="Écrivez ici votre commentaire"
+          aria-label="Nouveau commentaire"></textarea>
+        <button class="send-btn" (click)="addComment()" [disabled]="!newComment.trim()" aria-label="Envoyer le commentaire">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M22 2L11 13"/>
             <path d="M22 2L15 22L11 13L2 9L22 2Z"/>
           </svg>
         </button>
       </div>
       @if (commentError) {
-        <div class="error-message">{{ commentError }}</div>
+        <div class="error-message" role="alert" aria-live="assertive">{{ commentError }}</div>
       }
     </section>
   </div>
