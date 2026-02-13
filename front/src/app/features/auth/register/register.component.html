@@ -1,4 +1,4 @@
-<a routerLink="/" class="back-link">&larr;</a>
+<a routerLink="/" class="back-link" aria-label="Retour à l'accueil">&larr;</a>
 
 <div class="auth-content">
   <h1 class="page-title page-title--auth">Inscription</h1>
@@ -7,55 +7,55 @@
     <div class="form-group">
       <label for="username">Nom d'utilisateur</label>
       <input id="username" [(ngModel)]="username" name="username"
-             required minlength="3" maxlength="100" #usernameField="ngModel" />
+             required aria-required="true" minlength="3" maxlength="100" #usernameField="ngModel" />
       @if (usernameField.touched && usernameField.hasError('required')) {
-        <span class="field-error">Le nom d'utilisateur est requis</span>
+        <span class="field-error" role="alert">Le nom d'utilisateur est requis</span>
       }
       @if (usernameField.touched && usernameField.hasError('minlength')) {
-        <span class="field-error">3 caractères minimum</span>
+        <span class="field-error" role="alert">3 caractères minimum</span>
       }
       @if (fieldErrors['username']) {
-        <span class="field-error">{{ fieldErrors['username'] }}</span>
+        <span class="field-error" role="alert">{{ fieldErrors['username'] }}</span>
       }
     </div>
 
     <div class="form-group">
       <label for="email">Adresse e-mail</label>
       <input id="email" [(ngModel)]="email" name="email" type="email"
-             required email #emailField="ngModel" />
+             required aria-required="true" email #emailField="ngModel" />
       @if (emailField.touched && emailField.hasError('required')) {
-        <span class="field-error">L'e-mail est requis</span>
+        <span class="field-error" role="alert">L'e-mail est requis</span>
       }
       @if (emailField.touched && emailField.hasError('email')) {
-        <span class="field-error">Format d'e-mail invalide</span>
+        <span class="field-error" role="alert">Format d'e-mail invalide</span>
       }
       @if (fieldErrors['email']) {
-        <span class="field-error">{{ fieldErrors['email'] }}</span>
+        <span class="field-error" role="alert">{{ fieldErrors['email'] }}</span>
       }
     </div>
 
     <div class="form-group">
       <label for="password">Mot de passe</label>
       <input id="password" [(ngModel)]="password" name="password" type="password"
-             required minlength="8"
+             required aria-required="true" minlength="8"
              pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
              #passwordField="ngModel" />
       @if (passwordField.touched && passwordField.hasError('required')) {
-        <span class="field-error">Le mot de passe est requis</span>
+        <span class="field-error" role="alert">Le mot de passe est requis</span>
       }
       @if (passwordField.touched && passwordField.hasError('minlength')) {
-        <span class="field-error">8 caractères minimum</span>
+        <span class="field-error" role="alert">8 caractères minimum</span>
       }
       @if (passwordField.touched && passwordField.hasError('pattern')) {
-        <span class="field-error">Doit contenir 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial</span>
+        <span class="field-error" role="alert">Doit contenir 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial</span>
       }
       @if (fieldErrors['password']) {
-        <span class="field-error">{{ fieldErrors['password'] }}</span>
+        <span class="field-error" role="alert">{{ fieldErrors['password'] }}</span>
       }
     </div>
 
     @if (errorMessage) {
-      <div class="error-message">{{ errorMessage }}</div>
+      <div class="error-message" role="alert" aria-live="assertive">{{ errorMessage }}</div>
     }
 
     <button type="submit" class="btn btn--primary btn--lg btn--center">S'inscrire</button>

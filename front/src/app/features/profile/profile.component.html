@@ -22,10 +22,10 @@
       @if (successMessage || errorMessage) {
         <div class="messages">
           @if (successMessage) {
-            <p class="success">{{ successMessage }}</p>
+            <p class="success" role="status" aria-live="polite">{{ successMessage }}</p>
           }
           @if (errorMessage) {
-            <p class="error">{{ errorMessage }}</p>
+            <p class="error" role="alert" aria-live="assertive">{{ errorMessage }}</p>
           }
         </div>
       }
