@@ -1,68 +1,67 @@
-<div class="register-container">
-  <img src="/assets/logo_p6.png" alt="MDD Logo" class="logo" />
-  <h1>Inscription</h1>
+<a routerLink="/" class="back-link" aria-label="Retour à l'accueil">&larr;</a>
 
-  <form (ngSubmit)="onSubmit()" class="register-form">
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Email</mat-label>
-      <input matInput [(ngModel)]="email" name="email" type="email"
-             required email #emailField="ngModel" />
-      @if (emailField.hasError('required')) {
-        <mat-error>Email is required</mat-error>
-      }
-      @if (emailField.hasError('email')) {
-        <mat-error>Invalid email format</mat-error>
-      }
-    </mat-form-field>
-    @if (fieldErrors['email']) {
-      <div class="field-error">{{ fieldErrors['email'] }}</div>
-    }
+<div class="auth-content">
+  <h1 class="page-title page-title--auth">Inscription</h1>
 
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Nom d'utilisateur</mat-label>
-      <input matInput [(ngModel)]="username" name="username"
-             required minlength="3" maxlength="100" #usernameField="ngModel" />
-      @if (usernameField.hasError('required')) {
-        <mat-error>Username is required</mat-error>
+  <form (ngSubmit)="onSubmit()" class="auth-form" #registerForm="ngForm">
+    <div class="form-group">
+      <label for="username">Nom d'utilisateur</label>
+      <input id="username" [(ngModel)]="username" name="username"
+             required aria-required="true" minlength="3" maxlength="100" #usernameField="ngModel" />
+      @if (usernameField.touched && usernameField.hasError('required')) {
+        <span class="field-error" role="alert">Le nom d'utilisateur est requis</span>
       }
-      @if (usernameField.hasError('minlength')) {
-        <mat-error>Username must be at least 3 characters</mat-error>
+      @if (usernameField.touched && usernameField.hasError('minlength')) {
+        <span class="field-error" role="alert">3 caractères minimum</span>
       }
-    </mat-form-field>
-    @if (fieldErrors['username']) {
-      <div class="field-error">{{ fieldErrors['username'] }}</div>
-    }
+      @if (fieldErrors['username']) {
+        <span class="field-error" role="alert">{{ fieldErrors['username'] }}</span>
+      }
+    </div>
 
-    <mat-form-field appearance="outline" subscriptSizing="dynamic">
-      <mat-label>Mot de passe</mat-label>
-      <input matInput [(ngModel)]="password" name="password" type="password"
-             required minlength="8"
+    <div class="form-group">
+      <label for="email">Adresse e-mail</label>
+      <input id="email" [(ngModel)]="email" name="email" type="email"
+             required aria-required="true" email #emailField="ngModel" />
+      @if (emailField.touched && emailField.hasError('required')) {
+        <span class="field-error" role="alert">L'e-mail est requis</span>
+      }
+      @if (emailField.touched && emailField.hasError('email')) {
+        <span class="field-error" role="alert">Format d'e-mail invalide</span>
+      }
+      @if (fieldErrors['email']) {
+        <span class="field-error" role="alert">{{ fieldErrors['email'] }}</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="password">Mot de passe</label>
+      <input id="password" [(ngModel)]="password" name="password" type="password"
+             required aria-required="true" minlength="8"
              pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$"
              #passwordField="ngModel" />
-      @if (passwordField.hasError('required')) {
-        <mat-error>Password is required</mat-error>
+      @if (passwordField.touched && passwordField.hasError('required')) {
+        <span class="field-error" role="alert">Le mot de passe est requis</span>
       }
-      @if (passwordField.hasError('minlength')) {
-        <mat-error>Password must be at least 8 characters</mat-error>
+      @if (passwordField.touched && passwordField.hasError('minlength')) {
+        <span class="field-error" role="alert">8 caractères minimum</span>
       }
-      @if (passwordField.hasError('pattern')) {
-        <mat-error>Must contain 1 digit, 1 lowercase, 1 uppercase, and 1 special character</mat-error>
+      @if (passwordField.touched && passwordField.hasError('pattern')) {
+        <span class="field-error" role="alert">Doit contenir 1 chiffre, 1 minuscule, 1 majuscule et 1 caractère spécial</span>
       }
-    </mat-form-field>
-    @if (fieldErrors['password']) {
-      <div class="field-error">{{ fieldErrors['password'] }}</div>
-    }
+      @if (fieldErrors['password']) {
+        <span class="field-error" role="alert">{{ fieldErrors['password'] }}</span>
+      }
+    </div>
 
     @if (errorMessage) {
-      <div class="error-message">
-        {{ errorMessage }}
-      </div>
+      <div class="error-message" role="alert" aria-live="assertive">{{ errorMessage }}</div>
     }
 
-    <button mat-raised-button color="primary" type="submit">S'inscrire</button>
+    <button type="submit" class="btn btn--primary btn--lg btn--center">S'inscrire</button>
   </form>
 
-  <p class="login-link">
+  <p class="switch-link">
     Déjà un compte ?
     <a routerLink="/login">Se connecter</a>
   </p>

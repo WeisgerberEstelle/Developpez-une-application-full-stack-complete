@@ -1,50 +1,112 @@
-mat-toolbar {
+.header {
   display: flex;
   align-items: center;
-  background-color: #3f51b5;
-  color: white;
+  min-height: 100px;
+  padding: 0 24px;
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 140px;
+    height: 80px;
+  }
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
 .nav-links {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 32px;
+}
 
-  a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+
+  &.active {
+    color: var(--color-primary);
+  }
+
+  &--logout {
+    color: #c62828;
     font-size: 14px;
-    opacity: 0.85;
+    font-weight: 700;
 
-    &:hover,
-    &.active {
-      opacity: 1;
+    &:hover {
+      color: #b71c1c;
     }
   }
 }
 
-.spacer {
-  flex: 1;
-}
-
-.nav-right {
+.profile-icon {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  color: #fff;
+  text-decoration: none;
 
-  a {
-    color: white;
+  &:hover {
+    background-color: #c0c0c0;
+  }
+}
+
+.hamburger {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  padding: 0;
+  display: none;
+  align-items: center;
+
+  @media (max-width: 768px) {
     display: flex;
-    align-items: center;
-    opacity: 0.85;
-
-    &:hover,
-    &.active {
-      opacity: 1;
-    }
   }
+}
 
-  button {
-    color: white;
-  }
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 99;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 60vw;
+  max-width: 250px;
+  height: 100vh;
+  box-sizing: border-box;
+  background: var(--color-bg);
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 48px 24px;
+  gap: 16px;
 }

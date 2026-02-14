@@ -1,68 +1,54 @@
 @if (user) {
-  <div class="profile-container">
-    <h1>Profil</h1>
+  <div class="page-container">
+    <h1 class="page-title page-title--content">Profil utilisateur</h1>
 
-    <mat-card class="profile-form-card">
-      <mat-card-content>
-        <form (ngSubmit)="onSave()">
-          <mat-form-field appearance="outline">
-            <mat-label>Email</mat-label>
-            <input matInput [(ngModel)]="email" name="email" type="email" />
-          </mat-form-field>
+    <form (ngSubmit)="onSave()" class="profile-form">
+      <div class="form-group">
+        <label for="username">Nom d'utilisateur</label>
+        <input id="username" [(ngModel)]="username" name="username" />
+      </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Nom d'utilisateur</mat-label>
-            <input matInput [(ngModel)]="username" name="username" />
-          </mat-form-field>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input id="email" [(ngModel)]="email" name="email" type="email" />
+      </div>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Nouveau mot de passe</mat-label>
-            <input matInput [(ngModel)]="password" name="password" type="password"
-                   placeholder="Laisser vide pour ne pas changer" />
-          </mat-form-field>
+      <div class="form-group">
+        <label for="password">Mot de passe</label>
+        <input id="password" [(ngModel)]="password" name="password" type="password"
+               placeholder="Laisser vide pour ne pas changer" />
+      </div>
 
-          @if (successMessage || errorMessage) {
-            <div class="messages">
-              @if (successMessage) {
-                <p class="success">{{ successMessage }}</p>
-              }
-              @if (errorMessage) {
-                <p class="error">{{ errorMessage }}</p>
-              }
-            </div>
+      @if (successMessage || errorMessage) {
+        <div class="messages">
+          @if (successMessage) {
+            <p class="success" role="status" aria-live="polite">{{ successMessage }}</p>
           }
+          @if (errorMessage) {
+            <p class="error" role="alert" aria-live="assertive">{{ errorMessage }}</p>
+          }
+        </div>
+      }
 
-          <button mat-raised-button color="primary" type="submit">Sauvegarder</button>
-        </form>
-      </mat-card-content>
-    </mat-card>
+      <button type="submit" class="btn btn--primary btn--md btn--center">Sauvegarder</button>
+    </form>
 
-    <h2>Abonnements</h2>
+    <hr class="separator" />
+
+    <h2 class="section-title">Abonnements</h2>
 
     @if (user.subscriptions.length > 0) {
-      <div class="subscriptions-list">
+      <div class="card-grid">
         @for (topic of user.subscriptions; track topic.id) {
-          <mat-card class="subscription-card">
-            <mat-card-header>
-              <mat-card-title>{{ topic.name }}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <p>{{ topic.description }}</p>
-            </mat-card-content>
-            <mat-card-actions>
-              <button mat-raised-button color="warn" (click)="unsubscribe(topic.id)">
-                Se désabonner
-              </button>
-            </mat-card-actions>
-          </mat-card>
+          <div class="card">
+            <h3 class="card__title">{{ topic.name }}</h3>
+            <p class="card__description">{{ topic.description }}</p>
+            <button class="btn btn--primary btn--sm btn--block-center" (click)="unsubscribe(topic.id)">Se désabonner</button>
+          </div>
         }
       </div>
     } @else {
-      <p>Aucun abonnement pour le moment.</p>
+      <p class="empty-message">Aucun abonnement pour le moment.</p>
     }
-
-    <div class="logout-section">
-      <button mat-raised-button (click)="logout()">Se déconnecter</button>
-    </div>
   </div>
 }

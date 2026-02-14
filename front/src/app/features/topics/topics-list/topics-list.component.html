@@ -1,25 +1,19 @@
-<div class="topics-container">
-  <h1>Thèmes</h1>
+<div class="page-container">
+  <h1 class="page-title page-title--section">Thèmes</h1>
 
-  <div class="topics-grid">
+  <div class="card-grid">
     @for (topic of topics; track topic.id) {
-      <mat-card class="topic-card">
-        <mat-card-header>
-          <mat-card-title>{{ topic.name }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ topic.description }}</p>
-        </mat-card-content>
-        <mat-card-actions>
-          <button
-            mat-raised-button
-            color="primary"
-            [disabled]="isSubscribed(topic.id)"
-            (click)="subscribe(topic.id)">
-            {{ isSubscribed(topic.id) ? 'Déjà abonné' : "S'abonner" }}
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      <div class="card">
+        <h3 class="card__title">{{ topic.name }}</h3>
+        <p class="card__description">{{ topic.description }}</p>
+        <button
+          class="btn btn--primary btn--sm-text"
+          [class.btn--subscribed]="isSubscribed(topic.id)"
+          [disabled]="isSubscribed(topic.id)"
+          (click)="subscribe(topic.id)">
+          {{ isSubscribed(topic.id) ? 'Déjà abonné' : "S'abonner" }}
+        </button>
+      </div>
     }
   </div>
 </div>
