@@ -4,7 +4,7 @@
   <div class="page-container--narrow">
     <div class="title-header">
       <a routerLink="/feed" class="back-link back-link--mobile" aria-label="Retour au fil d'articles">&larr;</a>
-      <h1>{{ post.title }}</h1>
+      <h1 class="page-title page-title--section">{{ post.title }}</h1>
     </div>
 
     <div class="post-meta">
@@ -20,7 +20,7 @@
     <hr class="separator" />
 
     <section class="comments-section">
-      <h2>Commentaires</h2>
+      <h2 class="section-title">Commentaires</h2>
 
       @if (comments.length === 0) {
         <p class="empty-message">Aucun commentaire pour le moment.</p>
