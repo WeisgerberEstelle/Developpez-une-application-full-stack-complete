@@ -22,8 +22,15 @@
       "ES2022",
       "dom"
     ],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jest"],
+    "paths": {
+      "cypress": ["./cypress/empty.d.ts"],
+      "cypress/*": ["./cypress/empty.d.ts"]
+    }
   },
+  "exclude": ["cypress", "node_modules/cypress"],
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
