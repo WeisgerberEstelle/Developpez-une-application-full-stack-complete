@@ -26,7 +26,7 @@ describe('TopicsListComponent (integration)', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [TopicsListComponent],
+      imports: [TopicsListComponent],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
