@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
 import { User } from '../../models/user.interface';
@@ -7,7 +8,8 @@ import { Topic } from '../../models/topic.interface';
 
 @Component({
   selector: 'app-profile',
-  standalone: false,
+  standalone: true,
+  imports: [FormsModule],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
