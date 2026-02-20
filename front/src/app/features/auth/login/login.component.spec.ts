@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { provideRouter } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
@@ -18,8 +17,7 @@ describe('LoginComponent (integration)', () => {
     localStorage.clear();
 
     await TestBed.configureTestingModule({
-      imports: [FormsModule],
-      declarations: [LoginComponent],
+      imports: [LoginComponent],
       providers: [
         provideRouter([{ path: 'feed', redirectTo: '' }]),
         provideHttpClient(),
