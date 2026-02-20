@@ -20,7 +20,7 @@ describe('FeedComponent (integration)', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FeedComponent],
+      imports: [FeedComponent],
       providers: [
         provideRouter([]),
         provideHttpClient(),
