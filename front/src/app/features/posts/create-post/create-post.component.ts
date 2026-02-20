@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { PostService } from '../../../core/services/post.service';
 import { TopicService } from '../../../core/services/topic.service';
 import { Topic } from '../../../models/topic.interface';
 
 @Component({
   selector: 'app-create-post',
-  standalone: false,
+  standalone: true,
+  imports: [RouterModule, FormsModule],
   templateUrl: './create-post.component.html',
   styleUrl: './create-post.component.scss'
 })
