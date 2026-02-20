@@ -35,7 +35,20 @@ describe('Logout', () => {
 
 describe('Unsubscribe from profile', () => {
   beforeEach(() => {
-    cy.login('charlie@example.com', 'Password1!');
+    cy.request({
+      method: 'POST',
+      url: 'http://localhost:3001/api/auth/login',
+      body: { emailOrUsername: 'charlie@example.com', password: 'Password1!' },
+    }).then((loginResponse) => {
+      const token = loginResponse.body.token;
+      window.localStorage.setItem('mdd_token', token);
+      cy.request({
+        method: 'POST',
+        url: 'http://localhost:3001/api/topics/1/subscribe',
+        headers: { Authorization: `Bearer ${token}` },
+        failOnStatusCode: false,
+      });
+    });
   });
 
   it('should unsubscribe from a topic on the profile page', () => {
@@ -44,11 +57,9 @@ describe('Unsubscribe from profile', () => {
     cy.get('.card').then(($cards) => {
       const countBefore = $cards.length;
 
-      if (countBefore > 0) {
-        cy.get('.card').first().contains('button', 'Se désabonner').click();
+      cy.get('.card').first().contains('button', 'Se désabonner').click();
 
-        cy.get('.card').should('have.length', countBefore - 1);
-      }
+      cy.get('.card').should('have.length', countBefore - 1);
     });
   });
 });
