@@ -37,7 +37,6 @@
     "@angular/compiler-cli": "^19.1.0",
     "@cypress/code-coverage": "^4.0.0",
     "@cypress/schematic": "^5.0.0",
-    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@jsdevtools/coverage-istanbul-loader": "^3.0.5",
     "@types/jest": "^30.0.0",
     "cypress": "^15.10.0",
