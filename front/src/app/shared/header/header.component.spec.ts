@@ -67,7 +67,7 @@ describe('HeaderComponent', () => {
 
       expect(authService.logout).toHaveBeenCalled();
       expect(component.menuOpen).toBe(false);
-      expect(navigateSpy).toHaveBeenCalledWith(['/login']);
+      expect(navigateSpy).toHaveBeenCalledWith(['/']);
     });
   });
 });
