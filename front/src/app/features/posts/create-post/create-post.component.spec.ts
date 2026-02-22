@@ -67,7 +67,7 @@ describe('CreatePostComponent (integration)', () => {
     httpMock.expectOne('http://localhost:3001/api/topics').flush(mockTopics);
 
     const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
-    const createdPost = { id: 99, title: 'New', content: 'Body', authorId: 1, authorUsername: 'alice', topicId: 1, topicName: 'Java', createdAt: '2025-01-01' };
+    const createdPost = { id: 99, title: 'New', content: 'Body', author: { id: 1, username: 'alice' }, topic: { id: 1, name: 'Java' }, createdAt: '2025-01-01' };
 
     component.topicId = 1;
     component.title = 'New';

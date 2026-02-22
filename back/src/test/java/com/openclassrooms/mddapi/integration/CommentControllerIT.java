@@ -57,7 +57,7 @@ class CommentControllerIT {
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content").value("Integration test comment"))
-                .andExpect(jsonPath("$.authorUsername").value("alice"));
+                .andExpect(jsonPath("$.author.username").value("alice"));
     }
 
     @Test
