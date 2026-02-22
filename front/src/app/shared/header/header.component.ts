@@ -27,6 +27,6 @@ export class HeaderComponent {
   logout(): void {
     this.authService.logout();
     this.menuOpen = false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }
