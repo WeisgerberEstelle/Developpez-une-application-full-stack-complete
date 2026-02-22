@@ -1,18 +1,20 @@
 package com.openclassrooms.mddapi.mapper;
 
+import com.openclassrooms.mddapi.dto.AuthorResponse;
 import com.openclassrooms.mddapi.dto.PostResponse;
+import com.openclassrooms.mddapi.dto.TopicResponse;
 import com.openclassrooms.mddapi.entity.Post;
+import com.openclassrooms.mddapi.entity.Topic;
+import com.openclassrooms.mddapi.entity.User;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PostMapper {
-    @Mapping(source = "author.id", target = "authorId")
-    @Mapping(source = "author.username", target = "authorUsername")
-    @Mapping(source = "topic.id", target = "topicId")
-    @Mapping(source = "topic.name", target = "topicName")
     PostResponse toResponse(Post post);
     List<PostResponse> toResponseList(List<Post> posts);
+
+    AuthorResponse toAuthorResponse(User user);
+    TopicResponse toTopicResponse(Topic topic);
 }
