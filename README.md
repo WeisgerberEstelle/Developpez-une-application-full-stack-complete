@@ -71,7 +71,9 @@ npm test
 ```
 
 - **50 tests** covering components (integration with HttpTestingController), services, guard and interceptor
-- ~90% coverage
+- ~95% coverage
+
+The coverage report is generated at `front/coverage/lcov-report/index.html`.
 
 ### E2E tests (Cypress)
 
@@ -84,6 +86,19 @@ npm run e2e:open     # interactive mode
 ```
 
 - **13 scenarios** covering all user journeys
+
+#### E2E coverage report
+
+Start the instrumented server, run Cypress, then generate the report:
+
+```bash
+cd front
+npx ng run front:serve-coverage   # start instrumented dev server on port 4200
+npx cypress run                   # run E2E tests (in another terminal)
+npx nyc report --reporter=lcov --reporter=text-summary --report-dir=coverage-e2e
+```
+
+The coverage report is generated at `front/coverage-e2e/lcov-report/index.html`.
 
 ## API endpoints
 
