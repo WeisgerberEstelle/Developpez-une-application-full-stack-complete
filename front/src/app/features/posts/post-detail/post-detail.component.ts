@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { PostService } from '../../../core/services/post.service';
 import { CommentService } from '../../../core/services/comment.service';
 import { Post } from '../../../models/post.interface';
@@ -7,7 +9,8 @@ import { Comment } from '../../../models/comment.interface';
 
 @Component({
   selector: 'app-post-detail',
-  standalone: false,
+  standalone: true,
+  imports: [RouterModule, FormsModule, DatePipe],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.scss'
 })

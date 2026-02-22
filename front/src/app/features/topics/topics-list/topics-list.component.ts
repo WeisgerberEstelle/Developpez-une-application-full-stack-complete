@@ -6,7 +6,7 @@ import { Topic } from '../../../models/topic.interface';
 
 @Component({
   selector: 'app-topics-list',
-  standalone: false,
+  standalone: true,
   templateUrl: './topics-list.component.html',
   styleUrl: './topics-list.component.scss'
 })

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { PostService } from '../../core/services/post.service';
 import { Post } from '../../models/post.interface';
+import { DatePipe, SlicePipe } from '@angular/common';
 
 @Component({
   selector: 'app-feed',
-  standalone: false,
+  standalone: true,
+  imports: [RouterModule, DatePipe, SlicePipe],
   templateUrl: './feed.component.html',
   styleUrl: './feed.component.scss'
 })
