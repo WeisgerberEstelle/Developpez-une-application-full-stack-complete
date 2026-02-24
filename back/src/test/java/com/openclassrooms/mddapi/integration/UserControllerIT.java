@@ -68,8 +68,8 @@ class UserControllerIT {
     }
 
     @Test
-    @DisplayName("PUT /api/user/me with email already used by another user should return 400")
-    void updateWithDuplicateEmailShouldReturn400() throws Exception {
+    @DisplayName("PUT /api/user/me with email already used by another user should return 409")
+    void updateWithDuplicateEmailShouldReturn409() throws Exception {
         UpdateUserRequest request = new UpdateUserRequest();
         request.setEmail("alice@example.com"); // alice's email
 
@@ -77,13 +77,13 @@ class UserControllerIT {
                         .header("Authorization", "Bearer " + bobToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.error").value("Email already in use"));
     }
 
     @Test
-    @DisplayName("PUT /api/user/me with username already taken should return 400")
-    void updateWithDuplicateUsernameShouldReturn400() throws Exception {
+    @DisplayName("PUT /api/user/me with username already taken should return 409")
+    void updateWithDuplicateUsernameShouldReturn409() throws Exception {
         UpdateUserRequest request = new UpdateUserRequest();
         request.setUsername("alice"); // alice's username
 
@@ -91,7 +91,7 @@ class UserControllerIT {
                         .header("Authorization", "Bearer " + bobToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.error").value("Username already in use"));
     }
 }

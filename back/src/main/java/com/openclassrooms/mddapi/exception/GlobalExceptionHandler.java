@@ -11,17 +11,24 @@ import java.util.Map;
 
 /**
  * Global REST exception handler.
- * Catches business errors ({@link IllegalArgumentException}) and validation errors
- * ({@link MethodArgumentNotValidException}) to return structured JSON responses.
+ * Maps each custom exception to its appropriate HTTP status code.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<Map<String, String>> handleIllegalArgument(
-            IllegalArgumentException ex) {
-        Map<String, String> error = new HashMap<>();
-        error.put("error", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(ResourceNotFoundException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicateResourceException.class)
+    public ResponseEntity<Map<String, String>> handleDuplicate(DuplicateResourceException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<Map<String, String>> handleUnauthorized(UnauthorizedException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -32,5 +39,11 @@ public class GlobalExceptionHandler {
                 errors.put(fieldError.getField(), fieldError.getDefaultMessage())
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    private ResponseEntity<Map<String, String>> buildErrorResponse(String message, HttpStatus status) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", message);
+        return ResponseEntity.status(status).body(error);
     }
 }
