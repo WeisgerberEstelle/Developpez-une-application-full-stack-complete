@@ -11,7 +11,7 @@
       @for (post of posts; track post.id) {
         <div class="card card--clickable" (click)="goToPost(post.id)">
           <h3 class="card__title">{{ post.title }}</h3>
-          <p class="post-meta">{{ post.createdAt | date:'dd/MM/yyyy' }} &middot; {{ post.author.username }}</p>
+          <p class="post-meta">{{ post.createdAt | date:'dd/MM/yyyy' }} &middot; {{ post.authorUsername }}</p>
           <p class="post-content">{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>
         </div>
       }

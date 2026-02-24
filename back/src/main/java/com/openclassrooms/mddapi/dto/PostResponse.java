@@ -9,7 +9,9 @@ public class PostResponse {
     private Long id;
     private String title;
     private String content;
-    private AuthorResponse author;
-    private TopicResponse topic;
+    private Long authorId;
+    private String authorUsername;
+    private Long topicId;
+    private String topicName;
     private LocalDateTime createdAt;
 }

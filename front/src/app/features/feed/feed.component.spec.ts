@@ -8,8 +8,8 @@ import { FeedComponent } from './feed.component';
 import { PostService } from '../../core/services/post.service';
 
 const mockPosts = [
-  { id: 1, title: 'Post A', content: 'Content A', author: { id: 1, username: 'alice' }, topic: { id: 1, name: 'Java' }, createdAt: '2025-01-01' },
-  { id: 2, title: 'Post B', content: 'Content B', author: { id: 2, username: 'bob' }, topic: { id: 2, name: 'Angular' }, createdAt: '2025-01-02' },
+  { id: 1, title: 'Post A', content: 'Content A', authorId: 1, authorUsername: 'alice', topicId: 1, topicName: 'Java', createdAt: '2025-01-01' },
+  { id: 2, title: 'Post B', content: 'Content B', authorId: 2, authorUsername: 'bob', topicId: 2, topicName: 'Angular', createdAt: '2025-01-02' },
 ];
 
 describe('FeedComponent (integration)', () => {

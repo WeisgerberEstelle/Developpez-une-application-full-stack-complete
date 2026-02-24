@@ -45,7 +45,7 @@ class PostControllerIT {
                         .header("Authorization", "Bearer " + aliceToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[*].topic.name",
+                .andExpect(jsonPath("$[*].topicName",
                         everyItem(is(oneOf("Java", "Angular", "Spring Boot")))));
     }
 
@@ -57,8 +57,8 @@ class PostControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.title").value("Bien debuter avec Spring Boot 3"))
-                .andExpect(jsonPath("$.author.username").value("alice"))
-                .andExpect(jsonPath("$.topic.name").value("Spring Boot"))
+                .andExpect(jsonPath("$.authorUsername").value("alice"))
+                .andExpect(jsonPath("$.topicName").value("Spring Boot"))
                 .andExpect(jsonPath("$.createdAt").isNotEmpty());
     }
 
@@ -77,8 +77,8 @@ class PostControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.title").value("Integration test post"))
-                .andExpect(jsonPath("$.author.username").value("alice"))
-                .andExpect(jsonPath("$.topic.name").value("Java"));
+                .andExpect(jsonPath("$.authorUsername").value("alice"))
+                .andExpect(jsonPath("$.topicName").value("Java"));
     }
 
     @Test

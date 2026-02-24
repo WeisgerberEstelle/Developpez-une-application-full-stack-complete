@@ -11,13 +11,15 @@ const mockPost = {
   id: 1,
   title: 'Test Post',
   content: 'Post content',
-  author: { id: 1, username: 'alice' },
-  topic: { id: 1, name: 'Java' },
+  authorId: 1,
+  authorUsername: 'alice',
+  topicId: 1,
+  topicName: 'Java',
   createdAt: '2025-01-01',
 };
 
 const mockComments = [
-  { id: 1, content: 'Nice post', author: { id: 2, username: 'bob' }, createdAt: '2025-01-02' },
+  { id: 1, content: 'Nice post', authorId: 2, authorUsername: 'bob', createdAt: '2025-01-02' },
 ];
 
 describe('PostDetailComponent (integration)', () => {
@@ -72,7 +74,7 @@ describe('PostDetailComponent (integration)', () => {
     httpMock.expectOne('http://localhost:3001/api/posts/1').flush(mockPost);
     httpMock.expectOne('http://localhost:3001/api/posts/1/comments').flush([...mockComments]);
 
-    const newComment = { id: 2, content: 'Great!', author: { id: 1, username: 'alice' }, createdAt: '2025-01-03' };
+    const newComment = { id: 2, content: 'Great!', authorId: 1, authorUsername: 'alice', createdAt: '2025-01-03' };
     component.newComment = 'Great!';
     component.addComment();
 
