@@ -4,6 +4,8 @@ import com.openclassrooms.mddapi.dto.AuthResponse;
 import com.openclassrooms.mddapi.dto.LoginRequest;
 import com.openclassrooms.mddapi.dto.RegisterRequest;
 import com.openclassrooms.mddapi.entity.User;
+import com.openclassrooms.mddapi.exception.DuplicateResourceException;
+import com.openclassrooms.mddapi.exception.UnauthorizedException;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -26,14 +28,14 @@ public class AuthService {
      *
      * @param request the registration data
      * @return an {@link AuthResponse} containing the JWT token
-     * @throws IllegalArgumentException if email or username already exists
+     * @throws DuplicateResourceException if email or username already exists
      */
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
+            throw new DuplicateResourceException("Email already in use");
         }
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new IllegalArgumentException("Username already taken");
+            throw new DuplicateResourceException("Username already taken");
         }
 
         User user = User.builder()
@@ -53,16 +55,16 @@ public class AuthService {
      *
      * @param request the login credentials
      * @return an {@link AuthResponse} containing the JWT token
-     * @throws IllegalArgumentException if credentials are invalid
+     * @throws UnauthorizedException if credentials are invalid
      */
     public AuthResponse login(LoginRequest request) {
         String identifier = request.getEmailOrUsername();
 
         User user = userRepository.findByEmailOrUsername(identifier, identifier)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid credentials"));
+                .orElseThrow(() -> new UnauthorizedException("Invalid credentials"));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid credentials");
+            throw new UnauthorizedException("Invalid credentials");
         }
 
         String token = jwtService.generateToken(user.getEmail());

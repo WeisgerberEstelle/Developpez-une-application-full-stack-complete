@@ -2,7 +2,8 @@ package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.mapper.TopicMapper;
+import com.openclassrooms.mddapi.exception.DuplicateResourceException;
+import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -25,8 +26,6 @@ class SubscriptionServiceTest {
     private UserRepository userRepository;
     @Mock
     private TopicRepository topicRepository;
-    @Mock
-    private TopicMapper topicMapper;
     @InjectMocks
     private SubscriptionService subscriptionService;
 
@@ -64,7 +63,7 @@ class SubscriptionServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         assertThatThrownBy(() -> subscriptionService.subscribe(user, 1L))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(DuplicateResourceException.class)
                 .hasMessage("Already subscribed to this topic");
     }
 
@@ -93,7 +92,7 @@ class SubscriptionServiceTest {
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
 
         assertThatThrownBy(() -> subscriptionService.unsubscribe(user, 1L))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Not subscribed to this topic");
     }
 }
