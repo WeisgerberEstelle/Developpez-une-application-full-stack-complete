@@ -9,7 +9,7 @@
   @if (posts.length > 0) {
     <div class="card-grid">
       @for (post of posts; track post.id) {
-        <div class="card card--clickable" (click)="goToPost(post.id)">
+        <div class="card card--clickable" role="link" tabindex="0" (click)="goToPost(post.id)" (keydown.enter)="goToPost(post.id)">
           <h3 class="card__title">{{ post.title }}</h3>
           <p class="post-meta">{{ post.createdAt | date:'dd/MM/yyyy' }} &middot; {{ post.author.username }}</p>
           <p class="post-content">{{ post.content | slice:0:200 }}{{ post.content.length > 200 ? '...' : '' }}</p>

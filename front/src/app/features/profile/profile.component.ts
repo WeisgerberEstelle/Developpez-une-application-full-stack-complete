@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
-import { User } from '../../models/user.interface';
+import { UpdateProfileRequest, User } from '../../models/user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,8 @@ export class ProfileComponent implements OnInit {
   successMessage = '';
   errorMessage = '';
 
+  private destroyRef = inject(DestroyRef);
+
   constructor(
     private authService: AuthService,
     private subscriptionService: SubscriptionService,
@@ -34,7 +37,7 @@ export class ProfileComponent implements OnInit {
     this.successMessage = '';
     this.errorMessage = '';
 
-    const request: any = {};
+    const request: UpdateProfileRequest = {};
     if (this.email !== this.user?.email) {
       request.email = this.email;
     }
@@ -49,7 +52,7 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    this.authService.updateProfile(request).subscribe({
+    this.authService.updateProfile(request).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (user) => {
         this.user = user;
         this.password = '';
@@ -62,7 +65,7 @@ export class ProfileComponent implements OnInit {
   }
 
   unsubscribe(topicId: number): void {
-    this.subscriptionService.unsubscribe(topicId).subscribe({
+    this.subscriptionService.unsubscribe(topicId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => this.loadUser(),
       error: (err) => console.error('Failed to unsubscribe', err)
     });
@@ -74,7 +77,7 @@ export class ProfileComponent implements OnInit {
   }
 
   private loadUser(): void {
-    this.authService.me().subscribe({
+    this.authService.me().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (user) => {
         this.user = user;
         this.email = user.email;

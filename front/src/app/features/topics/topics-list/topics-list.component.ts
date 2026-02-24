@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TopicService } from '../../../core/services/topic.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { SubscriptionService } from '../../../core/services/subscription.service';
@@ -12,7 +13,8 @@ import { Topic } from '../../../models/topic.interface';
 })
 export class TopicsListComponent implements OnInit {
   topics: Topic[] = [];
-  subscribedTopicIds: Set<number> = new Set();
+  subscribedTopicIds = new Set<number>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private topicService: TopicService,
@@ -21,7 +23,7 @@ export class TopicsListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.topicService.getAllTopics().subscribe({
+    this.topicService.getAllTopics().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (topics) => this.topics = topics,
       error: (err) => console.error('Failed to load topics', err)
     });
@@ -33,14 +35,14 @@ export class TopicsListComponent implements OnInit {
   }
 
   subscribe(topicId: number): void {
-    this.subscriptionService.subscribe(topicId).subscribe({
+    this.subscriptionService.subscribe(topicId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => this.loadSubscriptions(),
       error: (err) => console.error('Failed to subscribe', err)
     });
   }
 
   private loadSubscriptions(): void {
-    this.authService.me().subscribe({
+    this.authService.me().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (user) => {
         this.subscribedTopicIds = new Set(user.subscriptions.map(t => t.id));
       },

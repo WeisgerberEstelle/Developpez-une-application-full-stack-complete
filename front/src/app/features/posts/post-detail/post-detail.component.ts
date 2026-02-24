@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -19,6 +20,7 @@ export class PostDetailComponent implements OnInit {
   comments: Comment[] = [];
   newComment = '';
   commentError = '';
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +30,7 @@ export class PostDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.postService.getById(id).subscribe({
+    this.postService.getById(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (post) => {
         this.post = post;
         this.loadComments(id);
@@ -38,7 +40,7 @@ export class PostDetailComponent implements OnInit {
   }
 
   loadComments(postId: number): void {
-    this.commentService.getComments(postId).subscribe({
+    this.commentService.getComments(postId).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (comments) => this.comments = comments,
       error: (err) => console.error('Failed to load comments', err)
     });
@@ -49,7 +51,7 @@ export class PostDetailComponent implements OnInit {
       return;
     }
     this.commentError = '';
-    this.commentService.addComment(this.post.id, { content: this.newComment.trim() }).subscribe({
+    this.commentService.addComment(this.post.id, { content: this.newComment.trim() }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (comment) => {
         this.comments.push(comment);
         this.newComment = '';

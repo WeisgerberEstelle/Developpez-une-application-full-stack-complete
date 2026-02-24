@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PostService } from '../../../core/services/post.service';
@@ -18,6 +19,7 @@ export class CreatePostComponent implements OnInit {
   title = '';
   content = '';
   errorMessage = '';
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private postService: PostService,
@@ -26,7 +28,7 @@ export class CreatePostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.topicService.getAllTopics().subscribe({
+    this.topicService.getAllTopics().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (topics) => this.topics = topics,
       error: (err) => console.error('Failed to load topics', err)
     });
@@ -40,7 +42,7 @@ export class CreatePostComponent implements OnInit {
       topicId: this.topicId,
       title: this.title,
       content: this.content
-    }).subscribe({
+    }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (post) => this.router.navigate(['/posts', post.id]),
       error: (err) => {
         if (err.error && typeof err.error === 'object') {

@@ -18,7 +18,7 @@ describe('HeaderComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent],
+      imports: [HeaderComponent],
       providers: [
         provideRouter([]),
         { provide: AuthService, useValue: authMock },

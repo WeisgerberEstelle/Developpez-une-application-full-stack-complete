@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
@@ -14,6 +15,7 @@ export class LoginComponent {
   emailOrUsername = '';
   password = '';
   errorMessage = '';
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private authService: AuthService,
@@ -25,7 +27,7 @@ export class LoginComponent {
     this.authService.login({
       emailOrUsername: this.emailOrUsername,
       password: this.password
-    }).subscribe({
+    }).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => {
         this.router.navigate(['/feed']);
       },
