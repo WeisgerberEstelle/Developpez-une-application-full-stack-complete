@@ -17,5 +17,5 @@ spring:
 
 app:
   jwt:
-    secret: test-secret-key-that-is-long-enough-for-hs256-algorithm-in-tests
+    secret: ${JWT_TEST_SECRET:test-secret-key-that-is-long-enough-for-hs256-algorithm-in-tests}
     expiration-ms: 86400000
