@@ -125,6 +125,19 @@ describe('ProfileComponent (integration)', () => {
     expect(component.user!.subscriptions.length).toBe(0);
   });
 
+  it('should include password in request when provided', () => {
+    initComponent();
+
+    component.password = 'newPass123';
+    component.onSave();
+
+    const req = httpMock.expectOne('http://localhost:3001/api/user/me');
+    expect(req.request.body).toEqual({ password: 'newPass123' });
+    req.flush(mockUser);
+
+    expect(component.password).toBe('');
+  });
+
   it('should clear token and navigate to home on logout', () => {
     initComponent();
     localStorage.setItem('mdd_token', 'some-token');
