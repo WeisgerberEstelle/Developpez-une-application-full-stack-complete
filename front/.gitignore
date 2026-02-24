@@ -39,6 +39,7 @@ testem.log
 
 # E2E coverage
 /.nyc_output
+/coverage-e2e
 
 # System files
 .DS_Store

@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 public class CommentResponse {
     private Long id;
     private String content;
-    private Long authorId;
-    private String authorUsername;
+    private AuthorResponse author;
     private LocalDateTime createdAt;
 }
