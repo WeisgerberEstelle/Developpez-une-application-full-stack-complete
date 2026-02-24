@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.dto.CreateCommentRequest;
 import com.openclassrooms.mddapi.entity.Comment;
 import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.User;
+import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.mapper.CommentMapper;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.PostRepository;
@@ -57,7 +58,7 @@ class CommentServiceTest {
         when(postRepository.findById(99L)).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> commentService.getByPostId(99L))
-                .isInstanceOf(IllegalArgumentException.class)
+                .isInstanceOf(ResourceNotFoundException.class)
                 .hasMessage("Post not found");
     }
 

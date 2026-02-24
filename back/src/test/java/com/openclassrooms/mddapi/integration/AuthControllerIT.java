@@ -76,7 +76,7 @@ class AuthControllerIT {
         }
 
         @Test
-        @DisplayName("should return 400 when email is already in use")
+        @DisplayName("should return 409 when email is already in use")
         void registerWithDuplicateEmail() throws Exception {
             RegisterRequest request = new RegisterRequest();
             request.setEmail("alice@example.com"); // seed data
@@ -86,7 +86,7 @@ class AuthControllerIT {
             mockMvc.perform(post("/api/auth/register")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(request)))
-                    .andExpect(status().isBadRequest())
+                    .andExpect(status().isConflict())
                     .andExpect(jsonPath("$.error").value("Email already in use"));
         }
 
@@ -138,7 +138,7 @@ class AuthControllerIT {
         }
 
         @Test
-        @DisplayName("should return 400 with wrong password")
+        @DisplayName("should return 401 with wrong password")
         void loginWithWrongPassword() throws Exception {
             LoginRequest request = new LoginRequest();
             request.setEmailOrUsername("alice@example.com");
@@ -147,12 +147,12 @@ class AuthControllerIT {
             mockMvc.perform(post("/api/auth/login")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(request)))
-                    .andExpect(status().isBadRequest())
+                    .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("$.error").value("Invalid credentials"));
         }
 
         @Test
-        @DisplayName("should return 400 with unknown identifier")
+        @DisplayName("should return 401 with unknown identifier")
         void loginWithUnknownUser() throws Exception {
             LoginRequest request = new LoginRequest();
             request.setEmailOrUsername("nobody@test.com");
@@ -161,7 +161,7 @@ class AuthControllerIT {
             mockMvc.perform(post("/api/auth/login")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(request)))
-                    .andExpect(status().isBadRequest())
+                    .andExpect(status().isUnauthorized())
                     .andExpect(jsonPath("$.error").value("Invalid credentials"));
         }
     }

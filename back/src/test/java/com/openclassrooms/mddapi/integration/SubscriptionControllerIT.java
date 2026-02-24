@@ -45,12 +45,12 @@ class SubscriptionControllerIT {
     }
 
     @Test
-    @DisplayName("POST /api/topics/{id}/subscribe twice should return 400")
-    void subscribeToAlreadySubscribedTopicShouldReturn400() throws Exception {
+    @DisplayName("POST /api/topics/{id}/subscribe twice should return 409")
+    void subscribeToAlreadySubscribedTopicShouldReturn409() throws Exception {
         // alice is already subscribed to topic 1 (Java)
         mockMvc.perform(post("/api/topics/1/subscribe")
                         .header("Authorization", "Bearer " + aliceToken))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.error").value("Already subscribed to this topic"));
     }
 
@@ -68,12 +68,12 @@ class SubscriptionControllerIT {
     }
 
     @Test
-    @DisplayName("DELETE /api/topics/{id}/subscribe when not subscribed should return 400")
-    void unsubscribeWhenNotSubscribedShouldReturn400() throws Exception {
+    @DisplayName("DELETE /api/topics/{id}/subscribe when not subscribed should return 404")
+    void unsubscribeWhenNotSubscribedShouldReturn404() throws Exception {
         // alice is NOT subscribed to topic 7 (Databases)
         mockMvc.perform(delete("/api/topics/7/subscribe")
                         .header("Authorization", "Bearer " + aliceToken))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.error").value("Not subscribed to this topic"));
     }
 }

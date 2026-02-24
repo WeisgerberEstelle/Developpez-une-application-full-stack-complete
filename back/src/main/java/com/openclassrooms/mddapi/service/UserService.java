@@ -3,6 +3,8 @@ package com.openclassrooms.mddapi.service;
 import com.openclassrooms.mddapi.dto.UpdateUserRequest;
 import com.openclassrooms.mddapi.dto.UserResponse;
 import com.openclassrooms.mddapi.entity.User;
+import com.openclassrooms.mddapi.exception.DuplicateResourceException;
+import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +25,7 @@ public class UserService {
     @Transactional(readOnly = true)
     public UserResponse getCurrentUser(User user) {
         User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
         return userMapper.toResponse(managedUser);
     }
 
@@ -36,16 +38,16 @@ public class UserService {
      * @param user    the authenticated user
      * @param request the fields to update (nullable fields are skipped)
      * @return the updated user profile
-     * @throws IllegalArgumentException if new email or username is already taken
+     * @throws DuplicateResourceException if new email or username is already taken
      */
     public UserResponse updateUser(User user, UpdateUserRequest request) {
         User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         if (request.getEmail() != null) {
             if (userRepository.existsByEmail(request.getEmail()) &&
                     !managedUser.getEmail().equals(request.getEmail())) {
-                throw new IllegalArgumentException("Email already in use");
+                throw new DuplicateResourceException("Email already in use");
             }
             managedUser.setEmail(request.getEmail());
         }
@@ -53,7 +55,7 @@ public class UserService {
         if (request.getUsername() != null) {
             if (userRepository.existsByUsername(request.getUsername()) &&
                     !managedUser.getUsername().equals(request.getUsername())) {
-                throw new IllegalArgumentException("Username already in use");
+                throw new DuplicateResourceException("Username already in use");
             }
             managedUser.setUsername(request.getUsername());
         }

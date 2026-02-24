@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.dto.PostResponse;
 import com.openclassrooms.mddapi.entity.Post;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
+import com.openclassrooms.mddapi.exception.ResourceNotFoundException;
 import com.openclassrooms.mddapi.mapper.PostMapper;
 import com.openclassrooms.mddapi.repository.PostRepository;
 import com.openclassrooms.mddapi.repository.TopicRepository;
@@ -38,7 +39,7 @@ public class PostService {
      */
     public List<PostResponse> getFeed(User user) {
         User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         if (managedUser.getSubscribedTopics().isEmpty()) {
             return Collections.emptyList();
@@ -52,17 +53,17 @@ public class PostService {
     @Transactional(readOnly = true)
     public PostResponse getById(Long id) {
         Post post = postRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Post not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found"));
         return postMapper.toResponse(post);
     }
 
     @Transactional
     public PostResponse create(User user, CreatePostRequest request) {
         Topic topic = topicRepository.findById(request.getTopicId())
-                .orElseThrow(() -> new IllegalArgumentException("Topic not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Topic not found"));
 
         User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Post post = Post.builder()
                 .title(request.getTitle())
