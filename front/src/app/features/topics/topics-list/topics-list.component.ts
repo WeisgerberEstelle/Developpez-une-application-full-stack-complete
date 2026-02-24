@@ -13,7 +13,7 @@ import { Topic } from '../../../models/topic.interface';
 })
 export class TopicsListComponent implements OnInit {
   topics: Topic[] = [];
-  subscribedTopicIds: Set<number> = new Set();
+  subscribedTopicIds = new Set<number>();
   private destroyRef = inject(DestroyRef);
 
   constructor(

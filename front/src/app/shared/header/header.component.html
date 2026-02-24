@@ -27,7 +27,7 @@
 </header>
 
 @if (menuOpen) {
-  <div class="overlay" (click)="closeMenu()"></div>
+  <div class="overlay" role="button" tabindex="0" aria-label="Fermer le menu" (click)="closeMenu()" (keydown.enter)="closeMenu()"></div>
   <nav class="mobile-menu" aria-label="Menu mobile">
     <a (click)="logout()" (keydown.enter)="logout()" tabindex="0" class="nav-link nav-link--logout">Se déconnecter</a>
     <a routerLink="/feed" routerLinkActive="active" class="nav-link" (click)="closeMenu()">Articles</a>

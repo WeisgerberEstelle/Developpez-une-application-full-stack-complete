@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { SubscriptionService } from '../../core/services/subscription.service';
-import { User } from '../../models/user.interface';
+import { UpdateProfileRequest, User } from '../../models/user.interface';
 
 @Component({
   selector: 'app-profile',
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
     this.successMessage = '';
     this.errorMessage = '';
 
-    const request: any = {};
+    const request: UpdateProfileRequest = {};
     if (this.email !== this.user?.email) {
       request.email = this.email;
     }
