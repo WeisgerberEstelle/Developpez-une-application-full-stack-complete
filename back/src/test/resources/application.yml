@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/mdd_test?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-    username: ${DB_TEST_USERNAME:local}
-    password: ${DB_TEST_PASSWORD:Khumeia69@@@}
+    username: ${DB_TEST_USERNAME:root}
+    password: ${DB_TEST_PASSWORD:}
 
   jpa:
     hibernate:
