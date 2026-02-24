@@ -40,7 +40,7 @@ describe('FeedComponent (integration)', () => {
     httpMock.verify();
   });
 
-  it('should fetch posts via GET /posts/feed on init and populate the posts array', () => {
+  it('should load posts on init', () => {
     fixture.detectChanges();
 
     const req = httpMock.expectOne('http://localhost:3001/api/posts/feed');
@@ -52,7 +52,7 @@ describe('FeedComponent (integration)', () => {
     expect(component.posts[1].title).toBe('Post B');
   });
 
-  it('should reverse posts order when toggleSort is called', () => {
+  it('should reverse posts order on toggleSort', () => {
     fixture.detectChanges();
 
     const req = httpMock.expectOne('http://localhost:3001/api/posts/feed');
@@ -67,7 +67,7 @@ describe('FeedComponent (integration)', () => {
     expect(component.posts[1].title).toBe('Post A');
   });
 
-  it('should navigate to /posts/:id when goToPost is called', () => {
+  it('should navigate to post detail on goToPost', () => {
     const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
 
     component.goToPost(42);

@@ -39,11 +39,11 @@ describe('RegisterComponent (integration)', () => {
     localStorage.clear();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should send POST /auth/register, store token and navigate to /topics', () => {
+  it('should store token and navigate to /topics on successful register', () => {
     const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
 
     component.email = 'new@test.com';
@@ -82,7 +82,7 @@ describe('RegisterComponent (integration)', () => {
     expect(component.errorMessage).toBe('');
   });
 
-  it('should display generic error when server returns non-object error', () => {
+  it('should display generic error when server returns non-object response', () => {
     component.email = 'new@test.com';
     component.username = 'newuser';
     component.password = 'Password1!';

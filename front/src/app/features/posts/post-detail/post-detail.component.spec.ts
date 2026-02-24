@@ -50,7 +50,7 @@ describe('PostDetailComponent (integration)', () => {
     httpMock.verify();
   });
 
-  it('should load post via GET /posts/1 then comments via GET /posts/1/comments on init', () => {
+  it('should load post and comments on init', () => {
     fixture.detectChanges();
 
     const postReq = httpMock.expectOne('http://localhost:3001/api/posts/1');
@@ -66,7 +66,7 @@ describe('PostDetailComponent (integration)', () => {
     expect(component.comments[0].content).toBe('Nice post');
   });
 
-  it('should send POST /posts/1/comments when adding a comment, then update the list', () => {
+  it('should add comment and update the list', () => {
     fixture.detectChanges();
 
     httpMock.expectOne('http://localhost:3001/api/posts/1').flush(mockPost);
@@ -86,7 +86,7 @@ describe('PostDetailComponent (integration)', () => {
     expect(component.newComment).toBe('');
   });
 
-  it('should not send request when comment is empty', () => {
+  it('should skip request when comment is empty', () => {
     fixture.detectChanges();
 
     httpMock.expectOne('http://localhost:3001/api/posts/1').flush(mockPost);
@@ -98,7 +98,7 @@ describe('PostDetailComponent (integration)', () => {
     httpMock.expectNone('http://localhost:3001/api/posts/1/comments');
   });
 
-  it('should set commentError when adding a comment fails', () => {
+  it('should display error when adding comment fails', () => {
     fixture.detectChanges();
 
     httpMock.expectOne('http://localhost:3001/api/posts/1').flush(mockPost);

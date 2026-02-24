@@ -42,7 +42,7 @@ describe('CreatePostComponent (integration)', () => {
     httpMock.verify();
   });
 
-  it('should load topics via GET /topics on init', () => {
+  it('should load topics on init', () => {
     fixture.detectChanges();
 
     const req = httpMock.expectOne('http://localhost:3001/api/topics');
@@ -52,7 +52,7 @@ describe('CreatePostComponent (integration)', () => {
     expect(component.topics).toEqual(mockTopics);
   });
 
-  it('should not send create request when topicId is null', () => {
+  it('should skip request when topicId is null', () => {
     fixture.detectChanges();
     httpMock.expectOne('http://localhost:3001/api/topics').flush(mockTopics);
 
@@ -62,7 +62,7 @@ describe('CreatePostComponent (integration)', () => {
     httpMock.expectNone('http://localhost:3001/api/posts');
   });
 
-  it('should send POST /posts and navigate to the new post on success', () => {
+  it('should create post and navigate to it on success', () => {
     fixture.detectChanges();
     httpMock.expectOne('http://localhost:3001/api/topics').flush(mockTopics);
 
@@ -82,7 +82,7 @@ describe('CreatePostComponent (integration)', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/posts', 99]);
   });
 
-  it('should join validation errors into errorMessage when server returns an object', () => {
+  it('should display validation errors from server', () => {
     fixture.detectChanges();
     httpMock.expectOne('http://localhost:3001/api/topics').flush(mockTopics);
 
@@ -99,7 +99,7 @@ describe('CreatePostComponent (integration)', () => {
     expect(component.errorMessage).toContain('Content is required');
   });
 
-  it('should set generic errorMessage when server error is not an object', () => {
+  it('should display generic error on non-object server response', () => {
     fixture.detectChanges();
     httpMock.expectOne('http://localhost:3001/api/topics').flush(mockTopics);
 

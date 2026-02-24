@@ -1,25 +1,27 @@
 package com.openclassrooms.mddapi.service;
 
-import com.openclassrooms.mddapi.dto.TopicResponse;
 import com.openclassrooms.mddapi.entity.Topic;
 import com.openclassrooms.mddapi.entity.User;
-import com.openclassrooms.mddapi.mapper.TopicMapper;
 import com.openclassrooms.mddapi.repository.TopicRepository;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
     private final UserRepository userRepository;
     private final TopicRepository topicRepository;
-    private final TopicMapper topicMapper;
 
     @Transactional
+    /**
+     * Subscribes the user to a topic.
+     *
+     * @param user    the authenticated user
+     * @param topicId the topic to subscribe to
+     * @throws IllegalArgumentException if already subscribed or topic not found
+     */
     public void subscribe(User user, Long topicId) {
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("Topic not found"));
@@ -36,6 +38,13 @@ public class SubscriptionService {
     }
 
     @Transactional
+    /**
+     * Unsubscribes the user from a topic.
+     *
+     * @param user    the authenticated user
+     * @param topicId the topic to unsubscribe from
+     * @throws IllegalArgumentException if not subscribed or topic not found
+     */
     public void unsubscribe(User user, Long topicId) {
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("Topic not found"));
@@ -49,12 +58,5 @@ public class SubscriptionService {
 
         managedUser.getSubscribedTopics().remove(topic);
         userRepository.save(managedUser);
-    }
-
-    @Transactional(readOnly = true)
-    public List<TopicResponse> getSubscribedTopics(User user) {
-        User managedUser = userRepository.findById(user.getId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        return topicMapper.toResponseList(List.copyOf(managedUser.getSubscribedTopics()));
     }
 }

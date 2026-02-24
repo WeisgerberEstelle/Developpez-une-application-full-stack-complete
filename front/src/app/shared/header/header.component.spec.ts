@@ -32,7 +32,7 @@ describe('HeaderComponent', () => {
     router = TestBed.inject(Router);
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
@@ -59,7 +59,7 @@ describe('HeaderComponent', () => {
   });
 
   describe('logout', () => {
-    it('should call authService.logout, close menu and navigate to /login', () => {
+    it('should logout, close menu and navigate to home', () => {
       const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
       component.menuOpen = true;
 

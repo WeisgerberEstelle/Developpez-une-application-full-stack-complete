@@ -10,6 +10,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
+/** MapStruct mapper for converting Post entities to DTOs (includes nested author and topic). */
 @Mapper(componentModel = "spring")
 public interface PostMapper {
     PostResponse toResponse(Post post);
