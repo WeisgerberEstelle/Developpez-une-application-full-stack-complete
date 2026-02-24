@@ -52,7 +52,7 @@ describe('ProfileComponent (integration)', () => {
     httpMock.expectOne('http://localhost:3001/api/user/me').flush(mockUser);
   }
 
-  it('should load user via GET /user/me on init and populate form fields', () => {
+  it('should load user and populate form on init', () => {
     initComponent();
 
     expect(component.user).toEqual(mockUser);
@@ -60,7 +60,7 @@ describe('ProfileComponent (integration)', () => {
     expect(component.username).toBe('alice');
   });
 
-  it('should send PUT /user/me with only changed username and update user on success', () => {
+  it('should update only changed username on save', () => {
     initComponent();
 
     component.username = 'alice-new';
@@ -78,7 +78,7 @@ describe('ProfileComponent (integration)', () => {
     expect(component.password).toBe('');
   });
 
-  it('should send PUT /user/me with only changed email', () => {
+  it('should update only changed email on save', () => {
     initComponent();
 
     component.email = 'new@test.com';
@@ -89,7 +89,7 @@ describe('ProfileComponent (integration)', () => {
     req.flush({ ...mockUser, email: 'new@test.com' });
   });
 
-  it('should not send request when no fields have changed', () => {
+  it('should skip request when no fields changed', () => {
     initComponent();
 
     component.onSave();
@@ -97,7 +97,7 @@ describe('ProfileComponent (integration)', () => {
     httpMock.expectNone('http://localhost:3001/api/user/me');
   });
 
-  it('should display error message when profile update fails', () => {
+  it('should display error message on update failure', () => {
     initComponent();
 
     component.email = 'taken@test.com';
@@ -109,7 +109,7 @@ describe('ProfileComponent (integration)', () => {
     expect(component.errorMessage).toBe('Email already in use');
   });
 
-  it('should send DELETE /topics/10/subscribe then reload user on unsubscribe', () => {
+  it('should unsubscribe and reload user', () => {
     initComponent();
 
     component.unsubscribe(10);
@@ -125,7 +125,7 @@ describe('ProfileComponent (integration)', () => {
     expect(component.user!.subscriptions.length).toBe(0);
   });
 
-  it('should clear token and navigate to / on logout', () => {
+  it('should clear token and navigate to home on logout', () => {
     initComponent();
     localStorage.setItem('mdd_token', 'some-token');
 

@@ -52,7 +52,7 @@ describe('TopicsListComponent (integration)', () => {
     httpMock.expectOne('http://localhost:3001/api/user/me').flush(mockUser);
   }
 
-  it('should load all topics and user subscriptions on init', () => {
+  it('should load topics and subscriptions on init', () => {
     initComponent();
 
     expect(component.topics).toEqual(mockTopics);
@@ -60,7 +60,7 @@ describe('TopicsListComponent (integration)', () => {
     expect(component.isSubscribed(2)).toBe(false);
   });
 
-  it('should send POST /topics/2/subscribe then reload subscriptions', () => {
+  it('should subscribe and reload subscriptions', () => {
     initComponent();
 
     component.subscribe(2);
