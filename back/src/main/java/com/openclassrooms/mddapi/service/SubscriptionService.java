@@ -8,9 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-/**
- * Manages user subscriptions to topics.
- */
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
