@@ -10,6 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Service for retrieving and updating user profiles.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -25,6 +28,16 @@ public class UserService {
     }
 
     @Transactional
+    /**
+     * Partially updates the user's profile.
+     * Only checks for duplicates if the value actually changed
+     * (avoids false positive when user re-submits the same email/username).
+     *
+     * @param user    the authenticated user
+     * @param request the fields to update (nullable fields are skipped)
+     * @return the updated user profile
+     * @throws IllegalArgumentException if new email or username is already taken
+     */
     public UserResponse updateUser(User user, UpdateUserRequest request) {
         User managedUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));

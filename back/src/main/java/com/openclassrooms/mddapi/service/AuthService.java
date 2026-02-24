@@ -10,6 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Handles user registration and login.
+ * Returns a JWT token on successful authentication.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -17,6 +21,13 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
 
+    /**
+     * Registers a new user after checking for email/username uniqueness.
+     *
+     * @param request the registration data
+     * @return an {@link AuthResponse} containing the JWT token
+     * @throws IllegalArgumentException if email or username already exists
+     */
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
@@ -37,6 +48,13 @@ public class AuthService {
         return new AuthResponse(token);
     }
 
+    /**
+     * Authenticates a user by email or username and password.
+     *
+     * @param request the login credentials
+     * @return an {@link AuthResponse} containing the JWT token
+     * @throws IllegalArgumentException if credentials are invalid
+     */
     public AuthResponse login(LoginRequest request) {
         String identifier = request.getEmailOrUsername();
 

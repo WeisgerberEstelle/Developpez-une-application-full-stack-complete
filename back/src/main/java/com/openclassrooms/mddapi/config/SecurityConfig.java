@@ -19,6 +19,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+/**
+ * Spring Security configuration: stateless JWT sessions, CORS for Angular,
+ * public auth endpoints, all other routes require authentication.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor

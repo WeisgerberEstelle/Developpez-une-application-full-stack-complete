@@ -11,6 +11,10 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+/**
+ * JPA entity representing a user.
+ * Manages a many-to-many relationship with topics through the subscriptions join table.
+ */
 @Entity
 @Table(name = "users")
 public class User {

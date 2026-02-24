@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Manages user subscriptions to topics.
+ */
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
@@ -15,6 +18,13 @@ public class SubscriptionService {
     private final TopicRepository topicRepository;
 
     @Transactional
+    /**
+     * Subscribes the user to a topic.
+     *
+     * @param user    the authenticated user
+     * @param topicId the topic to subscribe to
+     * @throws IllegalArgumentException if already subscribed or topic not found
+     */
     public void subscribe(User user, Long topicId) {
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("Topic not found"));
@@ -31,6 +41,13 @@ public class SubscriptionService {
     }
 
     @Transactional
+    /**
+     * Unsubscribes the user from a topic.
+     *
+     * @param user    the authenticated user
+     * @param topicId the topic to unsubscribe from
+     * @throws IllegalArgumentException if not subscribed or topic not found
+     */
     public void unsubscribe(User user, Long topicId) {
         Topic topic = topicRepository.findById(topicId)
                 .orElseThrow(() -> new IllegalArgumentException("Topic not found"));

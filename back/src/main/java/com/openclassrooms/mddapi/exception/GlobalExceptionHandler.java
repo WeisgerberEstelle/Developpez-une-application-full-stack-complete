@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Global REST exception handler.
+ * Catches business errors ({@link IllegalArgumentException}) and validation errors
+ * ({@link MethodArgumentNotValidException}) to return structured JSON responses.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)

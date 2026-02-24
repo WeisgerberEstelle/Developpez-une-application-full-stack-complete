@@ -10,6 +10,10 @@ import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
+/**
+ * JWT token management: generation, validation and subject (email) extraction.
+ * Uses HMAC-SHA signing with a configured secret key.
+ */
 @Service
 public class JwtService {
     @Value("${app.jwt.secret}")
@@ -18,6 +22,12 @@ public class JwtService {
     @Value("${app.jwt.expiration-ms}")
     private long jwtExpirationMs;
 
+    /**
+     * Generates a signed JWT token with the given email as subject.
+     *
+     * @param email the user's email used as token subject
+     * @return a compact JWT string
+     */
     public String generateToken(String email) {
         return Jwts.builder()
                 .subject(email)
@@ -27,6 +37,12 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Extracts the email (subject) from a signed JWT token.
+     *
+     * @param token the JWT string
+     * @return the email stored as subject
+     */
     public String getEmailFromToken(String token) {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
@@ -36,6 +52,12 @@ public class JwtService {
                 .getSubject();
     }
 
+    /**
+     * Validates a JWT token by parsing and verifying its signature.
+     *
+     * @param token the JWT string to validate
+     * @return {@code true} if the token is valid, {@code false} otherwise
+     */
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
@@ -48,6 +70,7 @@ public class JwtService {
         }
     }
 
+    /** Derives an HMAC-SHA key from the secret configured in application.properties. */
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
     }

@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Service for post creation and feed retrieval.
+ */
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -25,6 +28,14 @@ public class PostService {
     private final PostMapper postMapper;
 
     @Transactional(readOnly = true)
+    /**
+     * Returns the posts feed for the authenticated user based on subscribed topics.
+     * Re-fetches the user to get a managed JPA entity with current subscriptions.
+     * Skips the DB query if the user has no subscriptions.
+     *
+     * @param user the authenticated user
+     * @return list of posts from subscribed topics, ordered by newest first
+     */
     public List<PostResponse> getFeed(User user) {
         User managedUser = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
