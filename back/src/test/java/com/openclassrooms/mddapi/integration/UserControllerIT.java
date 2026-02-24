@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class UserControllerIT {
 
     @Autowired
@@ -63,14 +65,6 @@ class UserControllerIT {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.username").value(newUsername))
                 .andExpect(jsonPath("$.email").value("bob@example.com")); // email unchanged
-
-        // restore original username
-        UpdateUserRequest restore = new UpdateUserRequest();
-        restore.setUsername("bob");
-        mockMvc.perform(put("/api/user/me")
-                .header("Authorization", "Bearer " + bobToken)
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(restore)));
     }
 
     @Test

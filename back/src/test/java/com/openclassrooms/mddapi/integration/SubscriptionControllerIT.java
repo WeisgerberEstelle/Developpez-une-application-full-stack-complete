@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Transactional
 class SubscriptionControllerIT {
 
     @Autowired
@@ -35,11 +37,6 @@ class SubscriptionControllerIT {
     void subscribeShouldSucceed() throws Exception {
         // alice is NOT subscribed to topic 2 (JavaScript) in seed data
         mockMvc.perform(post("/api/topics/2/subscribe")
-                        .header("Authorization", "Bearer " + aliceToken))
-                .andExpect(status().isOk());
-
-        // cleanup: unsubscribe after test
-        mockMvc.perform(delete("/api/topics/2/subscribe")
                         .header("Authorization", "Bearer " + aliceToken))
                 .andExpect(status().isOk());
     }

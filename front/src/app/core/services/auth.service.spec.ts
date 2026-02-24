@@ -24,7 +24,7 @@ describe('AuthService', () => {
   });
 
   describe('login', () => {
-    it('should POST to /auth/login and store the token in localStorage', () => {
+    it('should store the token on successful login', () => {
       service.login({ emailOrUsername: 'alice@test.com', password: 'Password1!' }).subscribe();
 
       const req = httpMock.expectOne(`${apiUrl}/auth/login`);
@@ -36,7 +36,7 @@ describe('AuthService', () => {
   });
 
   describe('register', () => {
-    it('should POST to /auth/register and store the token in localStorage', () => {
+    it('should store the token on successful register', () => {
       service.register({ email: 'bob@test.com', username: 'bob', password: 'Password1!' }).subscribe();
 
       const req = httpMock.expectOne(`${apiUrl}/auth/register`);

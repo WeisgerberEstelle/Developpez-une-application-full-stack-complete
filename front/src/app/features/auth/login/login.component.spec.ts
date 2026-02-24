@@ -39,11 +39,11 @@ describe('LoginComponent (integration)', () => {
     localStorage.clear();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should send POST /auth/login, store token and navigate to /feed on success', () => {
+  it('should store token and navigate to /feed on successful login', () => {
     const navigateSpy = jest.spyOn(router, 'navigate').mockResolvedValue(true);
 
     component.emailOrUsername = 'alice@test.com';
@@ -63,7 +63,7 @@ describe('LoginComponent (integration)', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/feed']);
   });
 
-  it('should display server error message on login failure', () => {
+  it('should display error message when login fails', () => {
     component.emailOrUsername = 'alice@test.com';
     component.password = 'wrong';
     component.onSubmit();
@@ -75,7 +75,7 @@ describe('LoginComponent (integration)', () => {
     expect(localStorage.getItem('mdd_token')).toBeNull();
   });
 
-  it('should display fallback error message when server returns no error detail', () => {
+  it('should display fallback message when server returns no error detail', () => {
     component.emailOrUsername = 'alice@test.com';
     component.password = 'wrong';
     component.onSubmit();
