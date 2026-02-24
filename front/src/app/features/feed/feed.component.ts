@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterModule } from '@angular/router';
 import { PostService } from '../../core/services/post.service';
 import { Post } from '../../models/post.interface';
@@ -14,6 +15,7 @@ import { DatePipe, SlicePipe } from '@angular/common';
 export class FeedComponent implements OnInit {
   posts: Post[] = [];
   sortAsc = false;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private postService: PostService,
@@ -21,7 +23,7 @@ export class FeedComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.postService.getFeed().subscribe({
+    this.postService.getFeed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (posts) => this.posts = posts,
       error: (err) => console.error('Failed to load feed', err)
     });
