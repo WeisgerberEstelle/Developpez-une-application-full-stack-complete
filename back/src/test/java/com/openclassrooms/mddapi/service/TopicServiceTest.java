@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,6 +39,8 @@ class TopicServiceTest {
 
         List<TopicResponse> result = topicService.getAllTopics();
 
-        assertThat(result).hasSize(2);
+        assertThat(result).hasSize(2).isEqualTo(expected);
+        verify(topicRepository).findAll();
+        verify(topicMapper).toResponseList(topics);
     }
 }

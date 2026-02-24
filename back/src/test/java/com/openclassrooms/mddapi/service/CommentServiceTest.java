@@ -75,7 +75,7 @@ class CommentServiceTest {
 
         CommentResponse result = commentService.create(user, 1L, request);
 
-        assertThat(result).isNotNull();
+        assertThat(result).isEqualTo(expected);
         verify(commentRepository).save(any(Comment.class));
     }
 }
