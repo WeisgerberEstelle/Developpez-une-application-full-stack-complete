@@ -56,6 +56,9 @@ The application starts on `http://localhost:4200`.
 ```bash
 cd back
 DB_TEST_USERNAME=your_user DB_TEST_PASSWORD=your_password mvn test
+mvn test -Dtest="*Test"
+DB_TEST_USERNAME=your_user DB_TEST_PASSWORD=your_password mvn test -Dtest="*IT"
+mvn verify
 ```
 
 - **Unit tests**: 29 tests (services with Mockito mocks)
@@ -68,9 +71,12 @@ The JaCoCo coverage report is generated at `back/target/site/jacoco/index.html`.
 ```bash
 cd front
 npm test
+npx jest --testPathPattern='\.unit\.spec\.ts$'
+npx jest --testPathPattern='(?<!\.unit)\.spec\.ts$'
 ```
 
-- **53 tests** covering components (integration with HttpTestingController), services, guard and interceptor
+- **Unit tests**: 29 tests (components, services, guard, interceptor with jest.fn() mocks)
+- **Integration tests**: 40 tests (components with HttpTestingController)
 - ~89% coverage
 
 The coverage report is generated at `front/coverage/lcov-report/index.html`.
