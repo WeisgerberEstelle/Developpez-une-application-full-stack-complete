@@ -22,13 +22,13 @@ Create a MySQL user or use an existing one. The `mdd` database will be created a
 cd back
 ```
 
-Create a `.env` file at the root of the `back/` directory:
+Create a `.env` file at the root of the `back/` directory based on the provided example:
 
-```properties
-DATABASE_USERNAME=your_user
-DATABASE_PASSWORD=your_password
-JWT_SECRET=a-secret-key-long-enough-for-hs256-algorithm
+```bash
+cp .env.example .env
 ```
+
+Then edit `.env` with your own values (database credentials, JWT secret, etc.).
 
 Install dependencies and run:
 
@@ -56,6 +56,9 @@ The application starts on `http://localhost:4200`.
 ```bash
 cd back
 DB_TEST_USERNAME=your_user DB_TEST_PASSWORD=your_password mvn test
+mvn test -Dtest="*Test"
+DB_TEST_USERNAME=your_user DB_TEST_PASSWORD=your_password mvn test -Dtest="*IT"
+mvn verify
 ```
 
 - **Unit tests**: 29 tests (services with Mockito mocks)
@@ -68,10 +71,13 @@ The JaCoCo coverage report is generated at `back/target/site/jacoco/index.html`.
 ```bash
 cd front
 npm test
+npx jest --testPathPattern='\.unit\.spec\.ts$'
+npx jest --testPathPattern='(?<!\.unit)\.spec\.ts$'
 ```
 
-- **50 tests** covering components (integration with HttpTestingController), services, guard and interceptor
-- ~95% coverage
+- **Unit tests**: 29 tests (components, services, guard, interceptor with jest.fn() mocks)
+- **Integration tests**: 40 tests (components with HttpTestingController)
+- ~89% coverage
 
 The coverage report is generated at `front/coverage/lcov-report/index.html`.
 
@@ -154,6 +160,3 @@ All endpoints except `/api/auth/**` require the following header:
 Authorization: Bearer <token>
 ```
 
-## FAQ
-
-See [FAQ.md](FAQ.md) for use cases and common errors troubleshooting.
